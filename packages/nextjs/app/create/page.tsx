@@ -41,17 +41,17 @@ const Criar: NextPage = () => {
 
       const resposta = await fetch("/api/upload", { method: "POST", body: formData });
       const dados = await resposta.json();
-      if (!resposta.ok) throw new Error(dados.erro ?? "Falha ao enviar a imagem.");
+      if (!resposta.ok) throw new Error(dados.erro ?? "Failed to upload the image.");
 
       await writeContractAsync({
         functionName: "submitWork",
         args: [titulo.trim(), tecnica.trim(), ano, dados.url, "", dados.hash],
       });
 
-      notification.success("Obra tokenizada. O agente já foi acionado.");
-      router.push("/acervo");
+      notification.success("Work tokenised. The agent has been triggered.");
+      router.push("/portfolio");
     } catch (error) {
-      notification.error(error instanceof Error ? error.message : "Não foi possível tokenizar a obra.");
+      notification.error(error instanceof Error ? error.message : "Could not tokenise the work.");
     } finally {
       setEnviando(false);
     }
@@ -62,29 +62,29 @@ const Criar: NextPage = () => {
   return (
     <div className="mx-auto w-full max-w-5xl px-4 py-10 flex flex-col gap-6">
       <div>
-        <h1 className="text-3xl font-bold mb-1">Tokenizar uma obra</h1>
+        <h1 className="text-3xl font-bold mb-1">Tokenise a work</h1>
         <p className="text-base-content/70">
-          A obra entra na chain imediatamente, mas com a titularidade <strong>não verificada</strong>. É o registro
-          feito em seguida pelo agente que transforma essa declaração em titularidade reconhecida.
+          The work goes on chain right away, but with ownership <strong>unverified</strong>. It is the registration the
+          agent files next that turns this claim into recognised title.
         </p>
       </div>
 
-      <AvisoIdentidade acao="tokenizar uma obra" />
+      <AvisoIdentidade acao="tokenise a work" />
 
       <div className="grid gap-6 lg:grid-cols-[1fr_20rem]">
         <div className="card bg-base-100 border border-base-300">
           <div className="card-body gap-4">
             {verificada && (
               <p className="text-sm text-base-content/70">
-                Autoria será atribuída a <strong>{nome}</strong>, conforme sua identidade civil.
+                Authorship will be attributed to <strong>{nome}</strong>, per your civil identity.
               </p>
             )}
 
             <label className="form-control">
-              <span className="label-text mb-1">Título da obra</span>
+              <span className="label-text mb-1">Title</span>
               <input
                 className="input input-bordered w-full"
-                placeholder="Ex.: Retirantes do Cerrado"
+                placeholder="e.g. Retirantes do Cerrado"
                 value={titulo}
                 onChange={e => setTitulo(e.target.value)}
               />
@@ -92,17 +92,17 @@ const Criar: NextPage = () => {
 
             <div className="grid gap-4 sm:grid-cols-[1fr_8rem]">
               <label className="form-control">
-                <span className="label-text mb-1">Técnica e dimensões</span>
+                <span className="label-text mb-1">Medium and dimensions</span>
                 <input
                   className="input input-bordered w-full"
-                  placeholder="Ex.: Óleo sobre tela, 90 x 120 cm"
+                  placeholder="e.g. Oil on canvas, 90 x 120 cm"
                   value={tecnica}
                   onChange={e => setTecnica(e.target.value)}
                 />
               </label>
 
               <label className="form-control">
-                <span className="label-text mb-1">Ano</span>
+                <span className="label-text mb-1">Year</span>
                 <input
                   type="number"
                   className="input input-bordered w-full"
@@ -115,7 +115,7 @@ const Criar: NextPage = () => {
             </div>
 
             <label className="form-control">
-              <span className="label-text mb-1">Foto da obra</span>
+              <span className="label-text mb-1">Photo of the work</span>
               <input
                 type="file"
                 accept="image/png,image/jpeg,image/webp,image/svg+xml"
@@ -123,13 +123,13 @@ const Criar: NextPage = () => {
                 onChange={e => escolherArquivo(e.target.files?.[0] ?? null)}
               />
               <span className="label-text-alt mt-1 text-base-content/60">
-                JPG, PNG, WEBP ou SVG, até 8 MB. O hash do arquivo vai para a chain.
+                JPG, PNG, WEBP or SVG, up to 8 MB. The file hash goes on chain.
               </span>
             </label>
 
             <button className="btn btn-primary" disabled={!podeEnviar} onClick={tokenizar}>
               {enviando ? <span className="loading loading-spinner loading-sm" /> : null}
-              Tokenizar e abrir o processo
+              Tokenise and open the filing
             </button>
           </div>
         </div>
@@ -138,15 +138,15 @@ const Criar: NextPage = () => {
           <div className="card bg-base-200 border border-base-300 overflow-hidden">
             <div className="aspect-4/3 bg-base-300 flex items-center justify-center">
               {previa ? (
-                <img src={previa} alt="Prévia da obra" className="h-full w-full object-cover" />
+                <img src={previa} alt="Preview" className="h-full w-full object-cover" />
               ) : (
-                <span className="text-sm text-base-content/50">Prévia da obra</span>
+                <span className="text-sm text-base-content/50">Preview</span>
               )}
             </div>
             <div className="card-body p-4 gap-1">
-              <p className="font-semibold leading-tight">{titulo || "Sem título"}</p>
+              <p className="font-semibold leading-tight">{titulo || "Untitled"}</p>
               <p className="text-sm text-base-content/70 leading-tight">
-                {tecnica || "Técnica não informada"} · {ano}
+                {tecnica || "Medium not given"} · {ano}
               </p>
               {arquivo && (
                 <p className="text-xs text-base-content/50 mt-1">
@@ -158,14 +158,14 @@ const Criar: NextPage = () => {
 
           <div className="card bg-base-100 border border-base-300">
             <div className="card-body p-4 gap-2 text-sm">
-              <p className="font-medium">O que acontece depois</p>
+              <p className="font-medium">What happens next</p>
               <ol className="list-decimal list-inside text-base-content/70 flex flex-col gap-1">
-                <li>A obra é registrada com status de titularidade não verificada.</li>
-                <li>O evento dispara o agente, que protocola o processo de registro autoral.</li>
-                <li>Concluído o processo, o contrato ricardiano é gravado e a obra pode ser vendida.</li>
+                <li>The work is recorded with ownership unverified.</li>
+                <li>The event triggers the agent, which files the copyright registration.</li>
+                <li>Once filed, the Ricardian contract is recorded and the work can be sold.</li>
               </ol>
               <p className="text-xs text-base-content/50 mt-1">
-                Impressão digital do arquivo: {arquivo ? "calculada no envio" : encurtarHash(undefined)}
+                File fingerprint: {arquivo ? "computed on upload" : encurtarHash(undefined)}
               </p>
             </div>
           </div>

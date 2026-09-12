@@ -59,7 +59,7 @@ export const AnunciarObra = ({ tokenId }: { tokenId: bigint }) => {
       await escreverRegistro({ functionName: "setApprovalForAll", args: [marketplaceInfo.address, true] });
       await recarregarAutorizacao();
     } catch (error) {
-      notification.error(error instanceof Error ? error.message : "Falha ao autorizar o marketplace.");
+      notification.error(error instanceof Error ? error.message : "Failed to approve the marketplace.");
     } finally {
       setOcupado(false);
     }
@@ -70,10 +70,10 @@ export const AnunciarObra = ({ tokenId }: { tokenId: bigint }) => {
     setOcupado(true);
     try {
       await escreverMercado({ functionName: "listWork", args: [tokenId, precoWei] });
-      notification.success("Obra anunciada.");
+      notification.success("Work listed.");
       setPreco("");
     } catch (error) {
-      notification.error(error instanceof Error ? error.message : "Falha ao anunciar a obra.");
+      notification.error(error instanceof Error ? error.message : "Failed to list the work.");
     } finally {
       setOcupado(false);
     }
@@ -87,26 +87,26 @@ export const AnunciarObra = ({ tokenId }: { tokenId: bigint }) => {
       {!autorizado ? (
         <button className="btn btn-sm btn-outline" disabled={ocupado} onClick={autorizar}>
           {ocupado ? <span className="loading loading-spinner loading-xs" /> : null}
-          Autorizar o marketplace
+          Approve the marketplace
         </button>
       ) : (
         <>
-          <EtherInput placeholder="Preço" onValueChange={({ valueInEth }) => setPreco(valueInEth)} />
+          <EtherInput placeholder="Price" onValueChange={({ valueInEth }) => setPreco(valueInEth)} />
           {precoWei > 0n && (
             <p className="text-xs text-base-content/70">
               {royalty > 0n ? (
                 <>
-                  Direito de sequência à autora: <strong>{eth(royalty)}</strong> · você recebe{" "}
+                  Resale royalty to the author: <strong>{eth(royalty)}</strong> · you receive{" "}
                   <strong>{eth(paraVendedor)}</strong>
                 </>
               ) : (
-                <>Sem direito de sequência nesta venda · você recebe {eth(paraVendedor)}</>
+                <>No resale royalty on this sale · you receive {eth(paraVendedor)}</>
               )}
             </p>
           )}
           <button className="btn btn-sm btn-primary" disabled={ocupado || precoWei <= 0n} onClick={anunciar}>
             {ocupado ? <span className="loading loading-spinner loading-xs" /> : null}
-            Colocar à venda
+            List for sale
           </button>
         </>
       )}

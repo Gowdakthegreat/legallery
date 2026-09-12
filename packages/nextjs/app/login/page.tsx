@@ -13,8 +13,8 @@ import { notification } from "~~/utils/scaffold-eth";
 
 const NIVEIS = [
   { valor: "bronze", rotulo: "Bronze" },
-  { valor: "prata", rotulo: "Prata" },
-  { valor: "ouro", rotulo: "Ouro" },
+  { valor: "prata", rotulo: "Silver" },
+  { valor: "ouro", rotulo: "Gold" },
 ];
 
 const Entrar: NextPage = () => {
@@ -62,7 +62,7 @@ const Entrar: NextPage = () => {
       });
 
       const dados = await resposta.json();
-      if (!resposta.ok) throw new Error(dados.erro ?? "Falha no login gov.br.");
+      if (!resposta.ok) throw new Error(dados.erro ?? "gov.br sign-in failed.");
 
       // 2. O cidadão consome a credencial a partir da própria carteira: é isso que prova
       //    a posse da chave privada.
@@ -71,10 +71,10 @@ const Entrar: NextPage = () => {
         args: [dados.cpfHash, dados.civilName, dados.level, BigInt(dados.deadline), dados.signature],
       });
 
-      notification.success("Identidade civil vinculada à sua carteira.");
+      notification.success("Civil identity linked to your wallet.");
       await recarregar();
     } catch (error) {
-      notification.error(error instanceof Error ? error.message : "Não foi possível concluir o login.");
+      notification.error(error instanceof Error ? error.message : "Could not complete sign-in.");
     } finally {
       setEnviando(false);
     }
@@ -86,10 +86,10 @@ const Entrar: NextPage = () => {
   return (
     <div className="mx-auto w-full max-w-2xl px-4 py-10 flex flex-col gap-6">
       <div>
-        <h1 className="text-3xl font-bold mb-1">Entrar com gov.br</h1>
+        <h1 className="text-3xl font-bold mb-1">Sign in with gov.br</h1>
         <p className="text-base-content/70">
-          O login vincula sua carteira ao seu CPF. É esse vínculo que permite abrir um processo de registro autoral em
-          seu nome — sem autor civil identificado, não existe obra registrável.
+          Signing in binds your wallet to your tax ID. That binding is what allows a copyright filing to be opened in
+          your name — with no identified author, there is no registrable work.
         </p>
       </div>
 
@@ -98,26 +98,26 @@ const Entrar: NextPage = () => {
           <div className="card-body gap-3">
             <div className="flex items-center gap-2">
               <CheckBadgeIcon className="h-6 w-6 text-success" />
-              <h2 className="card-title text-lg m-0">Identidade vinculada</h2>
+              <h2 className="card-title text-lg m-0">Identity linked</h2>
             </div>
             <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-sm">
-              <dt className="text-base-content/60">Nome civil</dt>
+              <dt className="text-base-content/60">Legal name</dt>
               <dd className="font-medium">{identidade.civilName}</dd>
-              <dt className="text-base-content/60">CPF</dt>
+              <dt className="text-base-content/60">Tax ID</dt>
               <dd className="font-mono">{encurtarHash(identidade.cpfHash)} (hash)</dd>
-              <dt className="text-base-content/60">Carteira</dt>
+              <dt className="text-base-content/60">Wallet</dt>
               <dd>
                 <Address address={address} chain={targetNetwork} format="short" />
               </dd>
-              <dt className="text-base-content/60">Verificado em</dt>
+              <dt className="text-base-content/60">Verified on</dt>
               <dd>{dataHora(identidade.verifiedAt)}</dd>
             </dl>
             <div className="card-actions">
-              <Link href="/criar" className="btn btn-sm btn-primary">
-                Tokenizar uma obra
+              <Link href="/create" className="btn btn-sm btn-primary">
+                Tokenise a work
               </Link>
-              <Link href="/mercado" className="btn btn-sm btn-ghost">
-                Ver o mercado
+              <Link href="/market" className="btn btn-sm btn-ghost">
+                Browse the market
               </Link>
             </div>
           </div>
@@ -130,17 +130,17 @@ const Entrar: NextPage = () => {
           <p className="text-2xl font-bold tracking-tight">
             gov<span className="text-[#FFCD07]">.</span>br
           </p>
-          <p className="text-sm opacity-90">Acesse sua conta</p>
+          <p className="text-sm opacity-90">Access your account</p>
         </div>
 
         <div className="bg-warning/20 border-b border-warning/40 px-6 py-2 text-xs">
-          Simulação. Não se conecta ao gov.br real: qualquer CPF e qualquer nome são aceitos, e a credencial é assinada
-          por uma chave de teste local.
+          Simulation. Not connected to the real gov.br: any tax ID and any name are accepted, and the credential is
+          signed by a local test key.
         </div>
 
         <div className="card-body gap-4">
           <label className="form-control">
-            <span className="label-text mb-1">CPF</span>
+            <span className="label-text mb-1">Tax ID (CPF)</span>
             <input
               className="input input-bordered w-full"
               placeholder="000.000.000-00"
@@ -151,17 +151,17 @@ const Entrar: NextPage = () => {
           </label>
 
           <label className="form-control">
-            <span className="label-text mb-1">Nome civil completo</span>
+            <span className="label-text mb-1">Full legal name</span>
             <input
               className="input input-bordered w-full"
-              placeholder="Qualquer nome serve nesta demonstração"
+              placeholder="Any name works in this demo"
               value={nome}
               onChange={e => setNome(e.target.value)}
             />
           </label>
 
           <label className="form-control">
-            <span className="label-text mb-1">Nível da conta</span>
+            <span className="label-text mb-1">Account level</span>
             <div className="join">
               {NIVEIS.map(n => (
                 <button
@@ -178,33 +178,35 @@ const Entrar: NextPage = () => {
 
           <button className="btn btn-primary" disabled={!podeEnviar} onClick={entrar}>
             {enviando ? <span className="loading loading-spinner loading-sm" /> : null}
-            {verificada ? "Vincular a outra identidade" : "Entrar"}
+            {verificada ? "Link a different identity" : "Sign in"}
           </button>
 
           {!isConnected && (
-            <p className="text-sm text-warning">Conecte sua carteira no topo da página antes de entrar.</p>
+            <p className="text-sm text-warning">Connect your wallet at the top of the page before signing in.</p>
           )}
 
           {isConnected && semSaldo && (
             <p className="text-sm text-warning">
-              Sua carteira está com 0 ETH e não consegue pagar o gás. Use o botão da torneira (💧) no topo da página
-              para se abastecer e tente de novo.
+              Your wallet has 0 ETH and cannot pay for gas. Use the faucet button (💧) at the top of the page to top up,
+              then try again.
             </p>
           )}
         </div>
       </div>
 
       <details className="collapse collapse-arrow border border-base-300 bg-base-100">
-        <summary className="collapse-title font-medium">Como o vínculo é feito sem entregar o CPF à rede</summary>
+        <summary className="collapse-title font-medium">
+          How the binding works without putting your tax ID on chain
+        </summary>
         <div className="collapse-content text-sm text-base-content/80 flex flex-col gap-2">
           <p>
-            O provedor de identidade assina uma credencial EIP-712 dizendo &quot;o CPF X pertence ao titular do endereço
-            Y&quot;. Quem envia a transação é você, a partir da sua carteira — é assim que a posse da chave privada fica
-            provada na chain.
+            The identity provider signs an EIP-712 credential stating &quot;tax ID X belongs to the holder of address
+            Y&quot;. You are the one who submits the transaction, from your own wallet — that is how possession of the
+            private key is proven on chain.
           </p>
           <p>
-            O número do CPF nunca vai para a rede: o contrato guarda apenas o hash com sal. O mesmo CPF só fica ativo em
-            uma carteira por vez; vincular a uma nova revoga a anterior.
+            The tax ID itself never reaches the network: the contract stores only a salted hash. One tax ID is active in
+            a single wallet at a time; linking a new one revokes the previous.
           </p>
         </div>
       </details>

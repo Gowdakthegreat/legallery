@@ -34,19 +34,19 @@ const Pedidos: NextPage = () => {
   return (
     <div className="mx-auto w-full max-w-4xl px-4 py-10 flex flex-col gap-6">
       <div>
-        <h1 className="text-3xl font-bold mb-1">Pedidos</h1>
+        <h1 className="text-3xl font-bold mb-1">Orders</h1>
         <p className="text-base-content/70">
           {emAndamento > 0
-            ? `${emAndamento} pedido(s) aguardando entrega física.`
-            : "Suas compras e vendas, com a custódia do pagamento."}
+            ? `${emAndamento} order(s) awaiting physical delivery.`
+            : "Your purchases and sales, with payment held in escrow."}
         </p>
       </div>
 
-      <AvisoIdentidade acao="ver seus pedidos" />
+      <AvisoIdentidade acao="see your orders" />
 
       {ids.length === 0 ? (
         <p className="text-base-content/60">
-          {isConnected ? "Nenhum pedido por aqui ainda." : "Conecte sua carteira para ver seus pedidos."}
+          {isConnected ? "No orders here yet." : "Connect your wallet to see your orders."}
         </p>
       ) : (
         <div className="flex flex-col gap-3">

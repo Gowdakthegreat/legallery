@@ -22,7 +22,7 @@ export const ContratoRicardiano = ({ uri, hashNaChain }: { uri: string; hashNaCh
     const carregar = async () => {
       try {
         const resposta = await fetch(uri);
-        if (!resposta.ok) throw new Error("não encontrado");
+        if (!resposta.ok) throw new Error("not found");
         const conteudo = await resposta.text();
         if (cancelado) return;
 
@@ -40,10 +40,10 @@ export const ContratoRicardiano = ({ uri, hashNaChain }: { uri: string; hashNaCh
   }, [uri, hashNaChain]);
 
   const selo = {
-    checando: { texto: "Conferindo o texto…", classe: "text-base-content/60" },
-    integro: { texto: "✅ Texto íntegro: confere com o hash gravado na chain", classe: "text-success" },
-    divergente: { texto: "⚠️ O texto não confere com o hash registrado na chain", classe: "text-error" },
-    indisponivel: { texto: "Documento indisponível neste ambiente", classe: "text-warning" },
+    checando: { texto: "Checking the text…", classe: "text-base-content/60" },
+    integro: { texto: "✅ Text intact: matches the hash recorded on chain", classe: "text-success" },
+    divergente: { texto: "⚠️ The text does not match the hash recorded on chain", classe: "text-error" },
+    indisponivel: { texto: "Document unavailable in this environment", classe: "text-warning" },
   }[integridade];
 
   return (
@@ -55,13 +55,13 @@ export const ContratoRicardiano = ({ uri, hashNaChain }: { uri: string; hashNaCh
 
       {texto && (
         <details className="collapse collapse-arrow border border-base-300 bg-base-200">
-          <summary className="collapse-title font-medium">Ler o contrato na íntegra</summary>
+          <summary className="collapse-title font-medium">Read the full contract</summary>
           <div className="collapse-content">
             <div className="prose prose-sm max-w-none prose-headings:mt-4 prose-table:text-sm prose-pre:bg-base-300 prose-pre:text-base-content">
               <ReactMarkdown remarkPlugins={[remarkGfm]}>{texto}</ReactMarkdown>
             </div>
             <a href={uri} target="_blank" rel="noreferrer" className="link text-sm">
-              Abrir o arquivo original
+              Open the original file
             </a>
           </div>
         </details>

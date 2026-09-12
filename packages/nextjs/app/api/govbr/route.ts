@@ -36,13 +36,13 @@ export async function POST(request: Request) {
     const { cpf, nome, nivel = "ouro", endereco, chainId, nonce } = body ?? {};
 
     if (typeof endereco !== "string") {
-      return NextResponse.json({ erro: "Informe o endereço da carteira." }, { status: 400 });
+      return NextResponse.json({ erro: "Provide the wallet address." }, { status: 400 });
     }
 
     const contracts = (deployedContracts as Record<number, Record<string, { address: string }>>)[Number(chainId)];
     const identity = contracts?.GovBrIdentity;
     if (!identity) {
-      return NextResponse.json({ erro: `GovBrIdentity não está implantado na rede ${chainId}.` }, { status: 400 });
+      return NextResponse.json({ erro: `GovBrIdentity is not deployed on network ${chainId}.` }, { status: 400 });
     }
 
     // Fora da chain local, assinar com a chave do Hardhat significa que qualquer pessoa pode
@@ -61,7 +61,7 @@ export async function POST(request: Request) {
     const cpfHash = keccak256(stringToHex(`${String(cpf ?? "").replace(SOMENTE_DIGITOS, "")}:${CPF_SALT}`));
     const level = NIVEIS[nivel as keyof typeof NIVEIS] ?? NIVEIS.ouro;
     const deadline = BigInt(Math.floor(Date.now() / 1000) + 15 * 60);
-    const civilName = String(nome ?? "").trim() || "Titular não informado";
+    const civilName = String(nome ?? "").trim() || "Unnamed holder";
 
     const signature = await issuer.signTypedData({
       domain: {
@@ -101,6 +101,6 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     console.error("Erro ao emitir credencial gov.br:", error);
-    return NextResponse.json({ erro: "Não foi possível emitir a credencial." }, { status: 500 });
+    return NextResponse.json({ erro: "Could not issue the credential." }, { status: 500 });
   }
 }

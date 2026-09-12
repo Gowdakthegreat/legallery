@@ -24,27 +24,27 @@ type HeaderMenuLink = {
 
 export const menuLinks: HeaderMenuLink[] = [
   {
-    label: "Início",
+    label: "Home",
     href: "/",
   },
   {
-    label: "Mercado",
-    href: "/mercado",
+    label: "Market",
+    href: "/market",
     icon: <BuildingStorefrontIcon className="h-4 w-4" />,
   },
   {
-    label: "Meu acervo",
-    href: "/acervo",
+    label: "My portfolio",
+    href: "/portfolio",
     icon: <PhotoIcon className="h-4 w-4" />,
   },
   {
-    label: "Pedidos",
-    href: "/pedidos",
+    label: "Orders",
+    href: "/orders",
     icon: <TruckIcon className="h-4 w-4" />,
   },
   {
     label: "gov.br",
-    href: "/entrar",
+    href: "/login",
     icon: <IdentificationIcon className="h-4 w-4" />,
   },
   {
@@ -113,8 +113,8 @@ export const Header = () => {
             <Image alt="Logo" className="cursor-pointer" fill src="/logo.svg" />
           </div>
           <div className="flex flex-col">
-            <span className="font-bold leading-tight">Registro de Obras</span>
-            <span className="text-xs">Autoria e revenda on-chain</span>
+            <span className="font-bold leading-tight">Art Registry</span>
+            <span className="text-xs">Authorship and resale on chain</span>
           </div>
         </Link>
         <ul className="hidden lg:flex lg:flex-nowrap h-full m-0 p-0 list-none">

@@ -10,27 +10,27 @@ import { type Obra, STATUS } from "~~/utils/registro";
 const ETAPAS = [
   {
     numero: "01",
-    titulo: "Identidade civil",
+    titulo: "Civil identity",
     texto:
-      "O artista entra com gov.br e vincula a carteira ao CPF. O provedor assina a credencial, o cidadão envia a transação: as duas metades da prova.",
+      "The artist signs in with gov.br and binds their wallet to their tax ID. The provider signs the credential, the citizen submits the transaction: both halves of the proof.",
   },
   {
     numero: "02",
-    titulo: "Obra tokenizada",
+    titulo: "Work tokenised",
     texto:
-      "Foto e ficha técnica entram na chain com o hash do arquivo. A obra nasce com titularidade não verificada — é só uma declaração carimbada no tempo.",
+      "Photo and details go on chain along with the file hash. The work starts with ownership unverified — it is only a timestamped claim.",
   },
   {
     numero: "03",
-    titulo: "Agente instrui o processo",
+    titulo: "The agent files it",
     texto:
-      "A transação dispara um agente autônomo que protocola o registro autoral, emite o parecer e redige o contrato ricardiano da obra.",
+      "The transaction triggers an autonomous agent that files the copyright registration, issues the legal opinion and drafts the work\u2019s Ricardian contract.",
   },
   {
     numero: "04",
-    titulo: "Titularidade reconhecida",
+    titulo: "Ownership recognised",
     texto:
-      "Com o registro concluído, a obra pode ser vendida. Na entrega, o pagamento sai da custódia e o autor recebe sua parte na valorização.",
+      "Once registered, the work can be sold. On delivery the payment leaves escrow and the author takes their share of the appreciation.",
   },
 ];
 
@@ -49,48 +49,48 @@ const Home: NextPage = () => {
   return (
     <div className="flex flex-col grow">
       <section className="px-4 pt-14 pb-10 mx-auto w-full max-w-5xl text-center flex flex-col items-center gap-5">
-        <span className="badge badge-outline">Registro autoral on-chain · Lei 9.610/98</span>
+        <span className="badge badge-outline">On-chain copyright registry · Brazilian Law 9.610/98</span>
         <h1 className="text-4xl sm:text-5xl font-bold leading-tight m-0">
-          Da tela ao registro legal,
+          From canvas to legal title,
           <br />
-          sem sair da blockchain
+          without leaving the chain
         </h1>
         <p className="text-lg text-base-content/70 max-w-2xl">
-          O artista tokeniza a obra, um agente autônomo instrui o processo de registro autoral brasileiro, e o contrato
-          garante os 5% do autor sobre a valorização em toda revenda — automaticamente, para sempre.
+          The artist tokenises the work, an autonomous agent files the Brazilian copyright registration, and the
+          contract secures the author\u2019s 5% of the appreciation on every resale — automatically, forever.
         </p>
         <div className="flex flex-wrap justify-center gap-3">
-          <Link href={isConnected && verificada ? "/criar" : "/entrar"} className="btn btn-primary">
-            {isConnected && verificada ? "Tokenizar uma obra" : "Entrar com gov.br"}
+          <Link href={isConnected && verificada ? "/create" : "/login"} className="btn btn-primary">
+            {isConnected && verificada ? "Tokenise a work" : "Sign in with gov.br"}
           </Link>
-          <Link href="/mercado" className="btn btn-ghost">
-            Ver o mercado
+          <Link href="/market" className="btn btn-ghost">
+            Browse the market
           </Link>
         </div>
 
         <div className="stats stats-vertical sm:stats-horizontal border border-base-300 bg-base-100 mt-4">
           <div className="stat place-items-center">
             <div className="stat-value text-3xl">{obras.length}</div>
-            <div className="stat-desc">obras na chain</div>
+            <div className="stat-desc">works on chain</div>
           </div>
           <div className="stat place-items-center">
             <div className="stat-value text-3xl">{registradas}</div>
-            <div className="stat-desc">com titularidade reconhecida</div>
+            <div className="stat-desc">with ownership recognised</div>
           </div>
           <div className="stat place-items-center">
             <div className="stat-value text-3xl">{emProcesso}</div>
-            <div className="stat-desc">em processo</div>
+            <div className="stat-desc">being filed</div>
           </div>
           <div className="stat place-items-center">
             <div className="stat-value text-3xl">{aVenda}</div>
-            <div className="stat-desc">à venda</div>
+            <div className="stat-desc">for sale</div>
           </div>
         </div>
       </section>
 
       <section className="bg-base-300 px-4 py-12">
         <div className="mx-auto w-full max-w-5xl">
-          <h2 className="text-2xl font-bold mb-6">Como funciona</h2>
+          <h2 className="text-2xl font-bold mb-6">How it works</h2>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {ETAPAS.map(etapa => (
               <div key={etapa.numero} className="card bg-base-100 border border-base-300">
@@ -109,30 +109,30 @@ const Home: NextPage = () => {
         <div className="grid gap-6 md:grid-cols-2">
           <div className="card bg-base-100 border border-base-300">
             <div className="card-body gap-3">
-              <h2 className="card-title text-lg m-0">Por que 5% sobre a valorização</h2>
+              <h2 className="card-title text-lg m-0">Why 5% of the appreciation</h2>
               <p className="text-sm text-base-content/80">
-                O art. 38 da Lei 9.610/98 dá ao autor o direito irrenunciável e inalienável de receber no mínimo 5%{" "}
-                <strong>sobre o aumento do preço</strong> verificado em cada revenda — não sobre o preço cheio. Se a
-                obra for revendida sem valorização, nada é devido.
+                Article 38 of Brazilian Law 9.610/98 gives the author a non-waivable, inalienable right to at least 5%{" "}
+                <strong>of the price increase</strong> on every resale — not of the full price. Resell a work at no gain
+                and nothing is owed.
               </p>
               <p className="text-sm text-base-content/80">
-                Por isso o contrato não usa o padrão ERC-2981 de royalties, que calcularia sobre o valor total da venda
-                e cobraria a mais do que a lei manda.
+                That is why the contract does not use the ERC-2981 royalty standard: it would charge against the full
+                sale price and collect more than the law allows.
               </p>
             </div>
           </div>
 
           <div className="card bg-base-100 border border-base-300">
             <div className="card-body gap-3">
-              <h2 className="card-title text-lg m-0">O registro não vale em toda parte</h2>
+              <h2 className="card-title text-lg m-0">Registration does not reach everywhere</h2>
               <p className="text-sm text-base-content/80">
-                Entre signatários da Convenção de Berna a proteção é automática, sem formalidade. Mas há países em que a
-                tutela prática depende de providências locais — a China, por exemplo, condiciona boa parte da execução
-                ao registro no CPCC.
+                Among Berne Convention signatories protection is automatic, with no formality. But in some countries
+                practical enforcement depends on local steps — China, for one, ties much of it to registration with the
+                CPCC.
               </p>
               <p className="text-sm text-base-content/80">
-                Cada obra registrada carrega a lista de jurisdições e mostra, sem maquiagem, onde a titularidade ainda{" "}
-                <strong>não</strong> é oponível.
+                Every registered work carries its jurisdiction list and shows, plainly, where the title is{" "}
+                <strong>not</strong> yet enforceable.
               </p>
             </div>
           </div>

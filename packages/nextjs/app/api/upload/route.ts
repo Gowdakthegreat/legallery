@@ -28,13 +28,13 @@ export async function POST(request: Request) {
     const file = formData.get("arquivo");
 
     if (!(file instanceof File)) {
-      return NextResponse.json({ erro: "Envie a imagem da obra." }, { status: 400 });
+      return NextResponse.json({ erro: "Upload an image of the work." }, { status: 400 });
     }
     if (!TIPOS_ACEITOS.includes(file.type)) {
-      return NextResponse.json({ erro: "Formato não aceito. Use JPG, PNG, WEBP ou SVG." }, { status: 400 });
+      return NextResponse.json({ erro: "Unsupported format. Use JPG, PNG, WEBP or SVG." }, { status: 400 });
     }
     if (file.size > TAMANHO_MAXIMO) {
-      return NextResponse.json({ erro: "A imagem passa de 8 MB." }, { status: 400 });
+      return NextResponse.json({ erro: "The image is larger than 8 MB." }, { status: 400 });
     }
 
     const bytes = new Uint8Array(await file.arrayBuffer());
@@ -49,6 +49,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ url: `/uploads/${nome}`, hash, tamanho: file.size });
   } catch (error) {
     console.error("Erro ao guardar a imagem:", error);
-    return NextResponse.json({ erro: "Não foi possível guardar a imagem." }, { status: 500 });
+    return NextResponse.json({ erro: "Could not store the image." }, { status: 500 });
   }
 }

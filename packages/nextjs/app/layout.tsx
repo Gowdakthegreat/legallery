@@ -6,8 +6,8 @@ import "~~/styles/globals.css";
 import { getMetadata } from "~~/utils/scaffold-eth/getMetadata";
 
 export const metadata = getMetadata({
-  title: "Registro de Obras",
-  description: "Tokenização de obras de arte com registro autoral brasileiro e direito de sequência on-chain",
+  title: "Art Registry",
+  description: "Tokenised artworks with Brazilian copyright registration and on-chain resale royalties",
 });
 
 const ScaffoldEthApp = ({ children }: { children: React.ReactNode }) => {

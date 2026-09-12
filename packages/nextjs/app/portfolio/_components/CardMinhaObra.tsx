@@ -29,9 +29,9 @@ export const CardMinhaObra = ({ tokenId, obra }: { tokenId: bigint; obra: Obra }
     setOcupado(true);
     try {
       await writeContractAsync({ functionName: "cancelListing", args: [tokenId] });
-      notification.success("Anúncio retirado.");
+      notification.success("Listing withdrawn.");
     } catch (error) {
-      notification.error(error instanceof Error ? error.message : "Falha ao retirar o anúncio.");
+      notification.error(error instanceof Error ? error.message : "Failed to withdraw the listing.");
     } finally {
       setOcupado(false);
     }
@@ -49,14 +49,14 @@ export const CardMinhaObra = ({ tokenId, obra }: { tokenId: bigint; obra: Obra }
           {obra.status !== STATUS.REGISTRADA ? (
             <LinhaDoTempo status={obra.status} />
           ) : emTransito ? (
-            <p className="text-sm text-warning">Vendida — aguardando o comprador confirmar o recebimento.</p>
+            <p className="text-sm text-warning">Sold — waiting for the buyer to confirm delivery.</p>
           ) : anunciada ? (
             <div className="flex flex-col gap-2">
               <p className="text-sm">
-                À venda por <strong>{eth(anuncio?.price)}</strong>
+                Listed at <strong>{eth(anuncio?.price)}</strong>
               </p>
               <button className="btn btn-sm btn-ghost" disabled={ocupado} onClick={cancelar}>
-                Retirar do mercado
+                Withdraw from market
               </button>
             </div>
           ) : (

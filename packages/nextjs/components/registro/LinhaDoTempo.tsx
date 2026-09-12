@@ -3,9 +3,9 @@ import { STATUS } from "~~/utils/registro";
 type Etapa = { titulo: string; detalhe: string };
 
 const ETAPAS: Etapa[] = [
-  { titulo: "Obra tokenizada", detalhe: "Autoria declarada e carimbada no tempo pela chain" },
-  { titulo: "Processo protocolado", detalhe: "O agente abriu o registro autoral no órgão competente" },
-  { titulo: "Titularidade reconhecida", detalhe: "Contrato ricardiano emitido e gravado na chain" },
+  { titulo: "Work tokenised", detalhe: "Authorship declared and timestamped by the chain" },
+  { titulo: "Filing opened", detalhe: "The agent filed the copyright registration with the competent body" },
+  { titulo: "Ownership recognised", detalhe: "Ricardian contract issued and recorded on chain" },
 ];
 
 /** Mostra em que ponto do processo de registro a obra está. */
@@ -39,14 +39,14 @@ export const LinhaDoTempo = ({ status }: { status: number }) => {
               {atual && (
                 <div className="mt-1 flex flex-col gap-1">
                   <progress className="progress progress-info w-48 h-1" />
-                  <p className="text-xs text-info">Em andamento — o agente está trabalhando nisso.</p>
+                  <p className="text-xs text-info">In progress — the agent is working on it.</p>
                 </div>
               )}
             </div>
           </li>
         );
       })}
-      {rejeitada && <li className="text-error font-medium">Processo indeferido.</li>}
+      {rejeitada && <li className="text-error font-medium">Filing denied.</li>}
     </ol>
   );
 };

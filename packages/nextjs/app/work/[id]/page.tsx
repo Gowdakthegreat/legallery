@@ -62,7 +62,7 @@ const Detalhe: NextPage = () => {
   if (!obra) {
     return (
       <div className="mx-auto w-full max-w-4xl px-4 py-16 text-center">
-        <p className="text-base-content/60">Carregando obra #{params?.id}…</p>
+        <p className="text-base-content/60">Loading work #{params?.id}…</p>
       </div>
     );
   }
@@ -73,8 +73,8 @@ const Detalhe: NextPage = () => {
 
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-10 flex flex-col gap-6">
-      <Link href="/mercado" className="link text-sm w-fit">
-        ← Voltar ao mercado
+      <Link href="/market" className="link text-sm w-fit">
+        ← Back to market
       </Link>
 
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_22rem]">
@@ -89,31 +89,31 @@ const Detalhe: NextPage = () => {
               <StatusObra status={obra.status} />
             </div>
             <p className="text-base-content/70">
-              {obra.technique || "Técnica não informada"} · {obra.year} · token #{tokenId.toString()}
+              {obra.technique || "Medium not given"} · {obra.year} · token #{tokenId.toString()}
             </p>
           </div>
 
           {registrada ? (
             <div className="card bg-base-100 border border-base-300">
               <div className="card-body gap-4">
-                <h2 className="card-title text-lg m-0">Registro autoral</h2>
+                <h2 className="card-title text-lg m-0">Copyright registration</h2>
                 <dl className="grid sm:grid-cols-2 gap-x-6 gap-y-2 text-sm">
                   <div>
-                    <dt className="text-base-content/60">Processo</dt>
+                    <dt className="text-base-content/60">Filing</dt>
                     <dd className="font-medium">{registro?.dossierNumber}</dd>
                   </div>
                   <div>
-                    <dt className="text-base-content/60">Órgão</dt>
+                    <dt className="text-base-content/60">Authority</dt>
                     <dd className="font-medium">{registro?.authority}</dd>
                   </div>
                   <div>
-                    <dt className="text-base-content/60">Concluído em</dt>
+                    <dt className="text-base-content/60">Completed on</dt>
                     <dd className="font-medium">{dataHora(registro?.registeredAt)}</dd>
                   </div>
                   <div>
-                    <dt className="text-base-content/60">Direito de sequência</dt>
+                    <dt className="text-base-content/60">Resale royalty</dt>
                     <dd className="font-medium">
-                      {((registro?.resaleRoyaltyBps ?? 0) / 100).toFixed(2)}% sobre a valorização
+                      {((registro?.resaleRoyaltyBps ?? 0) / 100).toFixed(2)}% of the appreciation
                     </dd>
                   </div>
                 </dl>
@@ -132,11 +132,11 @@ const Detalhe: NextPage = () => {
           ) : (
             <div className="card bg-base-100 border border-base-300">
               <div className="card-body gap-4">
-                <h2 className="card-title text-lg m-0">Processo de registro</h2>
+                <h2 className="card-title text-lg m-0">Registration progress</h2>
                 <LinhaDoTempo status={obra.status} />
                 {registro?.dossierNumber && (
                   <p className="text-sm text-base-content/70">
-                    Processo {registro.dossierNumber} · {registro.authority}
+                    Filing {registro.dossierNumber} · {registro.authority}
                   </p>
                 )}
               </div>
@@ -145,19 +145,19 @@ const Detalhe: NextPage = () => {
 
           <div className="card bg-base-100 border border-base-300">
             <div className="card-body gap-3">
-              <h2 className="card-title text-lg m-0">Eficácia por jurisdição</h2>
+              <h2 className="card-title text-lg m-0">Enforceability by jurisdiction</h2>
               {registrada ? (
                 <>
                   <Jurisdicoes jurisdicoes={lista} />
                   {pendencias.length > 0 && (
                     <p className="text-sm text-warning">
-                      Atenção: a titularidade ainda não é oponível em {pendencias.map(p => p.name).join(", ")}.
+                      Note: the title is not yet enforceable in {pendencias.map(p => p.name).join(", ")}.
                     </p>
                   )}
                 </>
               ) : (
                 <p className="text-sm text-base-content/60">
-                  A avaliação por país só é emitida quando o processo de registro é concluído.
+                  The per-country assessment is only issued once the registration concludes.
                 </p>
               )}
             </div>
@@ -167,14 +167,14 @@ const Detalhe: NextPage = () => {
         <aside className="flex flex-col gap-4">
           <div className="card bg-base-100 border border-base-300">
             <div className="card-body gap-3 text-sm">
-              <h2 className="card-title text-base m-0">Cadeia de titularidade</h2>
+              <h2 className="card-title text-base m-0">Chain of title</h2>
               <div>
-                <p className="text-base-content/60">Autor original</p>
-                <p className="font-medium">{nomeAutor || "Identidade não informada"}</p>
+                <p className="text-base-content/60">Original author</p>
+                <p className="font-medium">{nomeAutor || "Identity not given"}</p>
                 <Address address={obra.creator} chain={targetNetwork} format="short" size="xs" />
               </div>
               <div>
-                <p className="text-base-content/60">Titular atual</p>
+                <p className="text-base-content/60">Current holder</p>
                 {titular ? (
                   <Address address={titular} chain={targetNetwork} format="short" size="xs" />
                 ) : (
@@ -182,11 +182,11 @@ const Detalhe: NextPage = () => {
                 )}
               </div>
               <div>
-                <p className="text-base-content/60">Tokenizada em</p>
+                <p className="text-base-content/60">Tokenised on</p>
                 <p>{dataHora(obra.submittedAt)}</p>
               </div>
               <div>
-                <p className="text-base-content/60">Impressão digital do arquivo</p>
+                <p className="text-base-content/60">File fingerprint</p>
                 <p className="font-mono text-xs break-all">{encurtarHash(obra.fileHash, 10)}</p>
               </div>
             </div>
@@ -194,26 +194,26 @@ const Detalhe: NextPage = () => {
 
           <div className="card bg-base-100 border border-base-300">
             <div className="card-body gap-2 text-sm">
-              <h2 className="card-title text-base m-0">Mercado</h2>
+              <h2 className="card-title text-base m-0">Market</h2>
               <p>
-                Última venda: <strong>{(ultimoPreco ?? 0n) > 0n ? eth(ultimoPreco) : "nunca vendida"}</strong>
+                Last sale: <strong>{(ultimoPreco ?? 0n) > 0n ? eth(ultimoPreco) : "never sold"}</strong>
               </p>
               {anuncio?.active ? (
                 <>
                   <p>
-                    À venda por <strong>{eth(anuncio.price)}</strong>
+                    Listed at <strong>{eth(anuncio.price)}</strong>
                   </p>
-                  <Link href="/mercado" className="btn btn-sm btn-primary">
-                    Ver no mercado
+                  <Link href="/market" className="btn btn-sm btn-primary">
+                    See it in the market
                   </Link>
                 </>
               ) : (
-                <p className="text-base-content/60">Não está à venda.</p>
+                <p className="text-base-content/60">Not for sale.</p>
               )}
               {registrada && (
                 <p className="text-xs text-base-content/60 mt-1">
-                  Em cada revenda, {((registro?.resaleRoyaltyBps ?? 0) / 100).toFixed(0)}% do aumento de preço vai
-                  automaticamente para o autor — direito irrenunciável e inalienável (Lei 9.610/98, art. 38).
+                  On every resale, {((registro?.resaleRoyaltyBps ?? 0) / 100).toFixed(0)}% of the price increase goes
+                  automatically to the author — a non-waivable, inalienable right (Brazilian Law 9.610/98, art. 38).
                 </p>
               )}
             </div>

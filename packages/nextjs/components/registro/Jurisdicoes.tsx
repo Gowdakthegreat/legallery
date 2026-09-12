@@ -6,7 +6,7 @@ import { COBERTURA_INFO, type Jurisdicao } from "~~/utils/registro";
  */
 export const Jurisdicoes = ({ jurisdicoes }: { jurisdicoes: readonly Jurisdicao[] }) => {
   if (!jurisdicoes?.length) {
-    return <p className="text-sm text-base-content/60">Nenhuma jurisdição avaliada ainda.</p>;
+    return <p className="text-sm text-base-content/60">No jurisdiction assessed yet.</p>;
   }
 
   return (
@@ -14,9 +14,9 @@ export const Jurisdicoes = ({ jurisdicoes }: { jurisdicoes: readonly Jurisdicao[
       <table className="table table-sm">
         <thead>
           <tr>
-            <th>País</th>
-            <th>Situação</th>
-            <th>Fundamento</th>
+            <th>Country</th>
+            <th>Status</th>
+            <th>Basis</th>
           </tr>
         </thead>
         <tbody>

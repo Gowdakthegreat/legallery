@@ -51,7 +51,7 @@ export const LinhaPedido = ({
       await writeContractAsync({ functionName: funcao, args: [orderId] });
       notification.success(mensagem);
     } catch (error) {
-      notification.error(error instanceof Error ? error.message : "Não foi possível concluir a operação.");
+      notification.error(error instanceof Error ? error.message : "Could not complete the operation.");
     } finally {
       setOcupado(false);
     }
@@ -60,7 +60,7 @@ export const LinhaPedido = ({
   return (
     <div className="card bg-base-100 border border-base-300">
       <div className="card-body p-4 gap-3 sm:flex-row sm:items-center">
-        <Link href={`/obra/${pedido.tokenId}`} className="shrink-0">
+        <Link href={`/work/${pedido.tokenId}`} className="shrink-0">
           <div className="h-20 w-20 overflow-hidden rounded bg-base-200">
             {obra && <img src={obra.imageURI} alt={obra.title} className="h-full w-full object-cover" />}
           </div>
@@ -68,19 +68,19 @@ export const LinhaPedido = ({
 
         <div className="grow min-w-0 flex flex-col gap-1">
           <div className="flex flex-wrap items-center gap-2">
-            <Link href={`/obra/${pedido.tokenId}`} className="font-semibold hover:underline">
-              {obra?.title ?? `Obra #${pedido.tokenId}`}
+            <Link href={`/work/${pedido.tokenId}`} className="font-semibold hover:underline">
+              {obra?.title ?? `Work #${pedido.tokenId}`}
             </Link>
             <span className={`badge ${estado?.classe} badge-sm`}>{estado?.rotulo}</span>
-            <span className="text-xs text-base-content/50">Pedido #{orderId.toString()}</span>
+            <span className="text-xs text-base-content/50">Order #{orderId.toString()}</span>
           </div>
 
           <div className="text-sm text-base-content/70 flex flex-wrap items-center gap-x-3 gap-y-1">
             <span>
-              {souComprador ? "Comprei por" : "Vendi por"} <strong>{eth(pedido.price)}</strong>
+              {souComprador ? "Bought for" : "Sold for"} <strong>{eth(pedido.price)}</strong>
             </span>
             <span className="flex items-center gap-1">
-              {souComprador ? "de" : "para"}
+              {souComprador ? "from" : "to"}
               <Address
                 address={(souComprador ? pedido.seller : pedido.buyer) as `0x${string}`}
                 chain={targetNetwork}
@@ -88,20 +88,20 @@ export const LinhaPedido = ({
                 size="xs"
               />
             </span>
-            <span>em {dataHora(pedido.createdAt)}</span>
+            <span>on {dataHora(pedido.createdAt)}</span>
           </div>
 
           {pedido.royaltyPaid > 0n && (
             <p className="text-xs text-success">
-              Direito de sequência pago à autora: {eth(pedido.royaltyPaid)} (5% sobre{" "}
-              {eth(pedido.price - pedido.previousPrice)} de valorização).
+              Resale royalty paid to the author: {eth(pedido.royaltyPaid)} (5% of{" "}
+              {eth(pedido.price - pedido.previousPrice)} in appreciation).
             </p>
           )}
 
           {emTransito && souComprador && (
             <p className="text-xs text-base-content/60">
-              O valor está em custódia. Confirme só depois de receber a obra física. Se não chegar até {dataHora(prazo)}
-              , você pode desfazer a compra.
+              The funds are in escrow. Only confirm after the physical work arrives. If it has not arrived by{" "}
+              {dataHora(prazo)}, you can undo the purchase.
             </p>
           )}
         </div>
@@ -112,19 +112,19 @@ export const LinhaPedido = ({
               <button
                 className="btn btn-sm btn-primary"
                 disabled={ocupado}
-                onClick={() => executar("confirmReceipt", "Recebimento confirmado. A obra é sua.")}
+                onClick={() => executar("confirmReceipt", "Delivery confirmed. The work is yours.")}
               >
                 {ocupado ? <span className="loading loading-spinner loading-xs" /> : null}
-                Confirmar recebimento
+                Confirm delivery
               </button>
             )}
             {(!souComprador || prazoVencido) && (
               <button
                 className="btn btn-sm btn-ghost"
                 disabled={ocupado}
-                onClick={() => executar("cancelOrder", "Compra desfeita e valor devolvido.")}
+                onClick={() => executar("cancelOrder", "Purchase undone and funds returned.")}
               >
-                {souComprador ? "Desfazer por não entrega" : "Cancelar e devolver"}
+                {souComprador ? "Undo — not delivered" : "Cancel and refund"}
               </button>
             )}
           </div>

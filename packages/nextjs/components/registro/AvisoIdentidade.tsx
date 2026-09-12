@@ -17,7 +17,7 @@ export const AvisoIdentidade = ({ acao }: { acao: string }) => {
   if (!isConnected) {
     return (
       <div className="alert alert-warning">
-        <span>Conecte sua carteira para {acao}.</span>
+        <span>Connect your wallet to {acao}.</span>
       </div>
     );
   }
@@ -25,9 +25,9 @@ export const AvisoIdentidade = ({ acao }: { acao: string }) => {
   if (!verificada) {
     return (
       <div className="alert alert-warning flex-col sm:flex-row items-start sm:items-center">
-        <span>Sua carteira ainda não está vinculada a uma identidade civil.</span>
-        <Link href="/entrar" className="btn btn-sm btn-neutral">
-          Entrar com gov.br
+        <span>Your wallet is not linked to a civil identity yet.</span>
+        <Link href="/login" className="btn btn-sm btn-neutral">
+          Sign in with gov.br
         </Link>
       </div>
     );

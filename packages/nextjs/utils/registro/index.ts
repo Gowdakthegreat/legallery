@@ -13,23 +13,23 @@ export type StatusObra = (typeof STATUS)[keyof typeof STATUS];
 
 export const STATUS_INFO: Record<number, { rotulo: string; descricao: string; classe: string }> = {
   [STATUS.SUBMETIDA]: {
-    rotulo: "Titularidade não verificada",
-    descricao: "A obra está na chain com data e hora, mas a autoria ainda não passou pelo registro legal.",
+    rotulo: "Ownership unverified",
+    descricao: "The work is timestamped on chain, but authorship has not been through legal registration yet.",
     classe: "badge-warning",
   },
   [STATUS.EM_ANALISE]: {
-    rotulo: "Em análise",
-    descricao: "O agente protocolou o processo de registro autoral e aguarda a conclusão.",
+    rotulo: "Under review",
+    descricao: "The agent filed the copyright registration and is waiting for it to conclude.",
     classe: "badge-info",
   },
   [STATUS.REGISTRADA]: {
-    rotulo: "Titularidade reconhecida",
-    descricao: "Processo concluído. A obra tem contrato ricardiano e pode ser negociada.",
+    rotulo: "Ownership recognised",
+    descricao: "Registration complete. The work has a Ricardian contract and can be traded.",
     classe: "badge-success",
   },
   [STATUS.REJEITADA]: {
-    rotulo: "Registro indeferido",
-    descricao: "O processo foi rejeitado. A obra não pode circular.",
+    rotulo: "Registration denied",
+    descricao: "The filing was rejected. The work cannot circulate.",
     classe: "badge-error",
   },
 };
@@ -42,9 +42,9 @@ export const COBERTURA = {
 } as const;
 
 export const COBERTURA_INFO: Record<number, { rotulo: string; icone: string; classe: string }> = {
-  [COBERTURA.RECONHECIDA]: { rotulo: "Reconhecida", icone: "✅", classe: "text-success" },
-  [COBERTURA.PENDENTE]: { rotulo: "Pendente", icone: "🕓", classe: "text-warning" },
-  [COBERTURA.NAO_COBERTA]: { rotulo: "Não coberta", icone: "⚠️", classe: "text-error" },
+  [COBERTURA.RECONHECIDA]: { rotulo: "Recognised", icone: "✅", classe: "text-success" },
+  [COBERTURA.PENDENTE]: { rotulo: "Pending", icone: "🕓", classe: "text-warning" },
+  [COBERTURA.NAO_COBERTA]: { rotulo: "Not covered", icone: "⚠️", classe: "text-error" },
 };
 
 export const ESTADO_PEDIDO = {
@@ -55,9 +55,9 @@ export const ESTADO_PEDIDO = {
 } as const;
 
 export const ESTADO_PEDIDO_INFO: Record<number, { rotulo: string; classe: string }> = {
-  [ESTADO_PEDIDO.EM_TRANSITO]: { rotulo: "Aguardando entrega", classe: "badge-warning" },
-  [ESTADO_PEDIDO.CONCLUIDA]: { rotulo: "Concluída", classe: "badge-success" },
-  [ESTADO_PEDIDO.CANCELADA]: { rotulo: "Cancelada", classe: "badge-ghost" },
+  [ESTADO_PEDIDO.EM_TRANSITO]: { rotulo: "Awaiting delivery", classe: "badge-warning" },
+  [ESTADO_PEDIDO.CONCLUIDA]: { rotulo: "Completed", classe: "badge-success" },
+  [ESTADO_PEDIDO.CANCELADA]: { rotulo: "Cancelled", classe: "badge-ghost" },
 };
 
 export type Obra = {
@@ -101,13 +101,13 @@ export function calcularDireitoDeSequencia(precoAnterior: bigint, precoNovo: big
 export function eth(valor: bigint | undefined, casas = 4): string {
   if (valor === undefined) return "—";
   const numero = Number(formatEther(valor));
-  return `${numero.toLocaleString("pt-BR", { maximumFractionDigits: casas })} ETH`;
+  return `${numero.toLocaleString("en-US", { maximumFractionDigits: casas })} ETH`;
 }
 
 export function dataHora(timestamp: bigint | number | undefined): string {
   const segundos = Number(timestamp ?? 0);
   if (!segundos) return "—";
-  return new Date(segundos * 1000).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" });
+  return new Date(segundos * 1000).toLocaleString("en-GB", { dateStyle: "short", timeStyle: "short" });
 }
 
 export function encurtarHash(hash: string | undefined, tamanho = 6): string {

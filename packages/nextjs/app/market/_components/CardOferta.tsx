@@ -37,9 +37,9 @@ export const CardOferta = ({
     setOcupado(true);
     try {
       await writeContractAsync({ functionName: "buy", args: [tokenId], value: preco });
-      notification.success("Compra realizada. O valor fica em custódia até você confirmar o recebimento.");
+      notification.success("Purchase made. The funds stay in escrow until you confirm delivery.");
     } catch (error) {
-      notification.error(error instanceof Error ? error.message : "Não foi possível concluir a compra.");
+      notification.error(error instanceof Error ? error.message : "Could not complete the purchase.");
     } finally {
       setOcupado(false);
     }
@@ -57,16 +57,16 @@ export const CardOferta = ({
         <div className="mt-2 border-t border-base-300 pt-3 flex flex-col gap-2">
           <div className="flex items-baseline justify-between gap-2">
             <span className="text-lg font-bold">{eth(preco)}</span>
-            <span className="text-xs text-base-content/60">{primeiraVenda ? "Venda pela autora" : "Revenda"}</span>
+            <span className="text-xs text-base-content/60">{primeiraVenda ? "Sold by the author" : "Resale"}</span>
           </div>
 
           <div className="text-xs text-base-content/60 flex items-center gap-1">
-            Vendedor: <Address address={vendedor as `0x${string}`} chain={targetNetwork} format="short" size="xs" />
+            Seller: <Address address={vendedor as `0x${string}`} chain={targetNetwork} format="short" size="xs" />
           </div>
 
           {royalty > 0n && (
             <p className="text-xs text-base-content/70">
-              Desta venda, <strong>{eth(royalty)}</strong> vão para a autora como direito de sequência.
+              Of this sale, <strong>{eth(royalty)}</strong> goes to the author as a resale royalty.
             </p>
           )}
 
@@ -74,10 +74,10 @@ export const CardOferta = ({
             className="btn btn-sm btn-primary"
             disabled={ocupado || ehVendedor || !verificada}
             onClick={comprar}
-            title={!verificada ? "Entre com gov.br para comprar" : undefined}
+            title={!verificada ? "Sign in with gov.br to buy" : undefined}
           >
             {ocupado ? <span className="loading loading-spinner loading-xs" /> : null}
-            {ehVendedor ? "Seu anúncio" : "Comprar"}
+            {ehVendedor ? "Your listing" : "Buy"}
           </button>
         </div>
       }
