@@ -88,12 +88,12 @@ async function renderApp() {
     mainContent = `
       <div class="container" style="padding-top: 4rem; padding-bottom: 6rem;">
         <div style="text-align: center; margin-bottom: 2rem;">
-          <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">Verificador de Tag NFC & Autenticidade</h1>
-          <p>Audite a autenticidade do exemplar físico e a integridade do Contrato Ricardiano na rede Ethereum.</p>
+          <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">NFC Tag Verifier & Physical Authenticity</h1>
+          <p>Audit the authenticity of physical pieces and Ricardian Contract integrity on the Ethereum network.</p>
         </div>
         <div style="max-width: 860px; margin: 0 auto;">
           <button class="btn btn-gold btn-lg" id="btn-open-nfc-standalone" style="width: 100%; margin-bottom: 2rem;">
-            Abrir Scanner de Leitura NFC Criptográfico
+            Open Cryptographic NFC Scanner
           </button>
         </div>
       </div>
@@ -142,13 +142,13 @@ async function renderApp() {
         <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 1rem;">
           <strong style="color: #fff; font-family: var(--font-serif); font-size: 1.1rem; letter-spacing: 0.05em;">LeGallery</strong>
           <span>•</span>
-          <span>Rede Ethereum (Base L2)</span>
+          <span>Ethereum Network (Base L2)</span>
           <span>•</span>
-          <span>Lei Federal 14.063/2020 (gov.br)</span>
+          <span>Federal Law 14,063/2020 (gov.br)</span>
           <span>•</span>
-          <span>Lei Federal 9.610/1998 (Direitos Autorais)</span>
+          <span>Federal Law 9,610/1998 (Copyright Law)</span>
         </div>
-        <p>Intermediação com segurança jurídica plena e custódia inteligente de arte física brasileira.</p>
+        <p>Direct settlement protocol with full legal certainty and intelligent escrow custody of Brazilian physical art.</p>
       </div>
     </footer>
     <div id="modal-root">${modalHtml}</div>
@@ -236,7 +236,7 @@ function attachEventListeners() {
       e.stopPropagation();
       const textToCopy = btn.dataset.copy;
       navigator.clipboard?.writeText(textToCopy);
-      showToast('Hash copiado para a área de transferência!', 'info');
+      showToast('Hash copied to clipboard!', 'info');
     });
   });
 
@@ -244,7 +244,7 @@ function attachEventListeners() {
   if (btnWalletProfile) {
     btnWalletProfile.addEventListener('click', () => {
       navigator.clipboard?.writeText('0x71C839210984AA61BC947819230581B849b2');
-      showToast('Endereço da carteira copiado!', 'info');
+      showToast('Wallet address copied!', 'info');
     });
   }
 
@@ -252,7 +252,7 @@ function attachEventListeners() {
   const btnExportPdf = document.getElementById('btn-export-pdf');
   if (btnExportPdf) {
     btnExportPdf.addEventListener('click', () => {
-      showToast('Minuta jurídica oficial exportada com selo gov.br!', 'success');
+      showToast('Official legal draft exported with gov.br stamp!', 'success');
       setTimeout(() => {
         window.print();
       }, 500);
@@ -352,7 +352,7 @@ function attachEventListeners() {
   if (btnEscrowDeposit) {
     btnEscrowDeposit.addEventListener('click', () => {
       state.escrowStep = 2;
-      showToast('Depósito de ETH efetuado no Smart Contract!', 'success');
+      showToast('ETH deposit confirmed in Smart Contract Escrow!', 'success');
       renderApp();
     });
   }
@@ -361,7 +361,7 @@ function attachEventListeners() {
   if (btnEscrowSignGov) {
     btnEscrowSignGov.addEventListener('click', () => {
       state.escrowStep = 3;
-      showToast('Contrato assinado com gov.br! Hash registrado na blockchain.', 'success');
+      showToast('Contract executed via gov.br! Hash anchored to blockchain.', 'success');
       renderApp();
     });
   }
@@ -370,7 +370,7 @@ function attachEventListeners() {
   if (btnEscrowArrival) {
     btnEscrowArrival.addEventListener('click', () => {
       state.escrowStep = 4;
-      showToast('Obra entregue ao destinatário! Aguardando validação NFC.', 'success');
+      showToast('Artwork delivered to recipient! Awaiting NFC verification.', 'success');
       renderApp();
     });
   }
@@ -380,12 +380,12 @@ function attachEventListeners() {
     btnEscrowFinish.addEventListener('click', () => {
       const art = state.artworks.find(a => a.id === state.selectedArtEscrowId);
       if (art) {
-        art.status = 'Adquirida / Posse Transferida';
+        art.status = 'Acquired / Ownership Transferred';
         state.walletBalance = Math.max(0, state.walletBalance - art.priceEth);
       }
       state.selectedArtEscrowId = null;
       state.escrowStep = 1;
-      showToast('Transação concluída! Token ERC-721 na sua carteira.', 'success');
+      showToast('Transaction completed! ERC-721 token transferred to your wallet.', 'success');
       renderApp();
     });
   }
@@ -415,7 +415,7 @@ function attachEventListeners() {
       setTimeout(() => {
         state.isNfcScanning = false;
         renderApp();
-        showToast('Leitura NFC NTAG 424 DNA concluída: Exemplar 100% Autêntico!', 'success');
+        showToast('NTAG 424 DNA NFC scan complete: 100% Authentic Piece!', 'success');
       }, 1400);
     });
   }
@@ -444,7 +444,7 @@ function attachEventListeners() {
       const newTag = `04:${hex()}:${hex()}:${hex()}:${hex()}:${hex()}:80`;
       const input = document.getElementById('tok-nfc');
       if (input) input.value = newTag;
-      showToast('Nova Tag Criptográfica NTAG 424 gerada com sucesso!', 'success');
+      showToast('New NTAG 424 Cryptographic Tag generated!', 'success');
     });
   }
 
@@ -470,35 +470,35 @@ function attachEventListeners() {
         title,
         artist,
         artistCpf,
-        artistLocation: 'São Paulo, SP',
-        govBrStatus: 'Nível Ouro',
+        artistLocation: 'São Paulo, Brazil',
+        govBrStatus: 'Gold Level',
         category,
         year: 2026,
         technique,
         dimensions,
         weight,
-        description: `Obra física contemporânea ${technique}, registrada pelo autor com certificação jurídica gov.br.`,
+        description: `Contemporary physical masterpiece ${technique}, registered by the author with official gov.br legal certification.`,
         image: '/assets/artwork_1.jpg',
         priceEth: price,
         tokenId: newTokenId,
         contractAddress: '0x3892BFA7332c69b61A9958197771fF642fE78E61',
         network: 'Ethereum (Base L2)',
         nfcSerial: `${nfc} - NTAG 424 DNA`,
-        status: 'Disponível',
+        status: 'Available',
         shippingIncluded: true,
         estimatedDeliveryDays: 4,
-        carrier: 'Logística Especializada com Seguro Total',
+        carrier: 'Specialized Fine Art Logistics with Comprehensive Insurance',
         provenance: [
-          { date: 'Hoje', event: 'Criação e registro no ateliê', tx: 'Físico' },
-          { date: 'Hoje', event: 'Aplicação da Tag NFC NTAG 424 DNA', tx: 'Físico' },
-          { date: 'Hoje', event: 'Assinatura Eletrônica gov.br (Lei 14.063/20)', tx: 'gov.br' },
-          { date: 'Hoje', event: 'Registro na rede Ethereum com Hash do Contrato Ricardiano', tx: '0x9b11...aa42' }
+          { date: 'Today', event: 'Creation and studio registration', tx: 'Physical' },
+          { date: 'Today', event: 'Affixing tamper-proof NTAG 424 DNA NFC Tag', tx: 'Physical' },
+          { date: 'Today', event: 'Electronic execution via gov.br (Law 14,063/20)', tx: 'gov.br' },
+          { date: 'Today', event: 'Ethereum registration with Ricardian Contract Hash', tx: '0x9b11...aa42' }
         ]
       };
 
       state.artworks.unshift(newArtwork);
       state.isTokenizeModalOpen = false;
-      showToast(`Obra "${title}" registrada com sucesso na rede Ethereum!`, 'success');
+      showToast(`Artwork "${title}" successfully registered on Ethereum!`, 'success');
       state.selectedArtDetailId = newArtwork.id;
       renderApp();
     });

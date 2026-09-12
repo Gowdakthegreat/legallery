@@ -23,24 +23,24 @@ export async function renderArtworkDetailModal(art, activeTab = 'legal', customC
   return `
     <div class="modal-backdrop" id="artwork-detail-modal">
       <div class="modal-content" style="max-width: 1080px;">
-        <button class="modal-close-btn" id="btn-close-detail" title="Fechar">✕</button>
+        <button class="modal-close-btn" id="btn-close-detail" title="Close">✕</button>
 
         <div class="detail-modal-layout">
-          <!-- Coluna Visual / Obra Física -->
+          <!-- Visual Column / Physical Artwork -->
           <div class="detail-modal-visual">
             <img src="${art.image}" alt="${art.title}" />
             <div style="position: absolute; bottom: 1.5rem; left: 1.5rem; right: 1.5rem; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); padding: 0.85rem 1.15rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between;">
               <div>
-                <div style="font-size: 0.75rem; font-weight: 700; color: #fff;">Chip Físico NTAG 424 DNA</div>
+                <div style="font-size: 0.75rem; font-weight: 700; color: #fff;">Physical NTAG 424 DNA Chip</div>
                 <div style="font-size: 0.68rem; color: var(--text-muted); font-family: var(--font-mono);">${art.nfcSerial.split(' - ')[0]}</div>
               </div>
               <button class="btn btn-secondary btn-sm" id="btn-test-nfc-inline" data-id="${art.id}">
-                Testar NFC
+                Test NFC
               </button>
             </div>
           </div>
 
-          <!-- Coluna Informações, Contrato e Ações -->
+          <!-- Info, Ricardian Contract & Actions Column -->
           <div class="detail-modal-info">
             <div>
               <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem; align-items: center;">
@@ -49,41 +49,41 @@ export async function renderArtworkDetailModal(art, activeTab = 'legal', customC
               </div>
               <h2 style="font-size: 1.9rem; margin-bottom: 0.3rem;">${art.title}</h2>
               <p style="font-size: 0.92rem; color: #cbd5e1;">
-                Por <strong>${art.artist}</strong> (${art.artistLocation})
+                By <strong>${art.artist}</strong> (${art.artistLocation})
               </p>
             </div>
 
-            <!-- Ficha Técnica Física -->
+            <!-- Physical Specs Grid -->
             <div style="background: var(--bg-tertiary); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); font-size: 0.82rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
               <div>
-                <span style="color: var(--text-muted); display: block; font-size: 0.7rem; text-transform: uppercase;">Técnica</span>
+                <span style="color: var(--text-muted); display: block; font-size: 0.7rem; text-transform: uppercase;">Technique</span>
                 <strong style="color: #fff;">${art.technique}</strong>
               </div>
               <div>
-                <span style="color: var(--text-muted); display: block; font-size: 0.7rem; text-transform: uppercase;">Dimensões & Peso</span>
+                <span style="color: var(--text-muted); display: block; font-size: 0.7rem; text-transform: uppercase;">Dimensions & Weight</span>
                 <strong style="color: #fff;">${art.dimensions} (${art.weight})</strong>
               </div>
               <div>
-                <span style="color: var(--text-muted); display: block; font-size: 0.7rem; text-transform: uppercase;">Ano de Criação</span>
+                <span style="color: var(--text-muted); display: block; font-size: 0.7rem; text-transform: uppercase;">Year of Creation</span>
                 <strong style="color: #fff;">${art.year}</strong>
               </div>
               <div>
-                <span style="color: var(--text-muted); display: block; font-size: 0.7rem; text-transform: uppercase;">Transporte & Seguro</span>
-                <strong style="color: var(--gov-green-light);">Seguro Integral Incluso</strong>
+                <span style="color: var(--text-muted); display: block; font-size: 0.7rem; text-transform: uppercase;">Shipping & Insurance</span>
+                <strong style="color: var(--gov-green-light);">Comprehensive Insurance Included</strong>
               </div>
             </div>
 
-            <!-- Bloco do Contrato Ricardiano Interativo -->
+            <!-- Interactive Ricardian Contract Block -->
             <div class="ricardian-box">
               <div class="ricardian-header">
                 <div style="display: flex; align-items: center; gap: 0.5rem;">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold-primary)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                  <strong style="font-size: 0.82rem; color: #fff;">Contrato Ricardiano Bilateral</strong>
+                  <strong style="font-size: 0.82rem; color: #fff;">Bilateral Ricardian Contract</strong>
                 </div>
                 <div class="ricardian-tabs">
-                  <button class="ricardian-tab-btn ${activeTab === 'legal' ? 'active' : ''}" data-rtab="legal">Texto Legal</button>
+                  <button class="ricardian-tab-btn ${activeTab === 'legal' ? 'active' : ''}" data-rtab="legal">Legal Text</button>
                   <button class="ricardian-tab-btn ${activeTab === 'machine' ? 'active' : ''}" data-rtab="machine">Smart Contract / JSON</button>
-                  <button class="ricardian-tab-btn ${activeTab === 'tamper' ? 'active' : ''}" data-rtab="tamper">Auditoria Anti-Fraude</button>
+                  <button class="ricardian-tab-btn ${activeTab === 'tamper' ? 'active' : ''}" data-rtab="tamper">Anti-Fraud Audit</button>
                 </div>
               </div>
 
@@ -91,9 +91,9 @@ export async function renderArtworkDetailModal(art, activeTab = 'legal', customC
                 ${activeTab === 'legal' ? `
                   <div class="ricardian-legal-text">
                     <div style="text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; margin-bottom: 0.75rem;">
-                      <div style="font-size: 0.72rem; color: var(--gold-secondary); font-family: var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase;">República Federativa do Brasil • Contrato Registrado</div>
-                      <h4>CONTRATO BILATERAL DE ALIENAÇÃO DE ARTE FÍSICA</h4>
-                      <div style="font-size: 0.68rem; color: var(--gov-green-light); font-family: var(--font-mono);">Chave Criptográfica: ${originalHash.substring(0, 24)}...</div>
+                      <div style="font-size: 0.72rem; color: var(--gold-secondary); font-family: var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase;">Federative Republic of Brazil • Registered Agreement</div>
+                      <h4>BILATERAL AGREEMENT FOR THE TRANSFER OF PHYSICAL ARTWORK</h4>
+                      <div style="font-size: 0.68rem; color: var(--gov-green-light); font-family: var(--font-mono);">Cryptographic Key: ${originalHash.substring(0, 24)}...</div>
                     </div>
                     <p style="white-space: pre-line;">${initialText}</p>
                   </div>
@@ -113,9 +113,9 @@ export async function renderArtworkDetailModal(art, activeTab = 'legal', customC
     "sha256_legal_contract": "${originalHash}"
   },
   "legal_enforcement": {
-    "jurisdiction": "Brasil",
-    "signature_provider": "gov.br (Lei 14.063/2020)",
-    "copyright_law": "Lei 9.610/1998 (Arts. 28, 49, 85)",
+    "jurisdiction": "Brazil",
+    "signature_provider": "gov.br (Federal Law 14,063/2020)",
+    "copyright_law": "Federal Law 9,610/1998 (Arts. 28, 49, 85)",
     "resale_royalty_percentage": 5.0
   }
 }
@@ -123,38 +123,38 @@ export async function renderArtworkDetailModal(art, activeTab = 'legal', customC
                 ` : `
                   <div>
                     <p style="font-size: 0.8rem; color: var(--gold-secondary); margin-bottom: 0.5rem;">
-                      💡 <strong>Teste de Integridade:</strong> Altere ou digite qualquer caractere no contrato abaixo para ver o Hash SHA-256 mudar instantaneamente. A blockchain rejeita qualquer divergência.
+                      💡 <strong>Integrity Test:</strong> Edit or type any character in the contract text below to watch the SHA-256 hash change instantly. The blockchain rejects any discrepancies.
                     </p>
                     <textarea id="tamper-textarea" style="width: 100%; height: 160px; font-size: 0.78rem; font-family: var(--font-mono);">${currentText}</textarea>
                   </div>
                 `}
               </div>
 
-              <!-- Strip de Assinatura e Hash SHA-256 -->
+              <!-- Signature Strip and SHA-256 Hash -->
               <div class="hash-signature-strip ${isViolated ? 'violated' : ''}">
                 <div>
                   <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">
-                    ${isViolated ? '⚠️ FRAUDE DETECTADA! Hash não confere com a Blockchain' : '✅ Hash Válido & Vinculado ao Smart Contract'}
+                    ${isViolated ? '⚠️ FRAUD DETECTED! Hash does not match the Blockchain' : '✅ Valid Hash & Bound to Smart Contract'}
                   </div>
                   <div style="font-family: var(--font-mono); font-size: 0.72rem; color: ${isViolated ? 'var(--status-danger)' : 'var(--gov-green-light)'}; font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
                     <span>${currentHash.substring(0, 24)}...${currentHash.substring(currentHash.length - 8)}</span>
-                    <button class="btn-copy-hash" data-copy="${currentHash}" title="Copiar hash completo">Copiar</button>
+                    <button class="btn-copy-hash" data-copy="${currentHash}" title="Copy full hash">Copy</button>
                   </div>
                 </div>
 
                 <div style="display: flex; gap: 0.5rem; align-items: center;">
-                  <button class="btn btn-secondary btn-sm" id="btn-export-pdf" title="Exportar minuta em PDF">
+                  <button class="btn btn-secondary btn-sm" id="btn-export-pdf" title="Export legal agreement as PDF">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                    <span>Baixar PDF</span>
+                    <span>Download PDF</span>
                   </button>
                 </div>
               </div>
             </div>
 
-            <!-- Bloco de Preço e Aquisição -->
+            <!-- Price & Acquisition Block -->
             <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 1rem; border-top: 1px solid var(--border-subtle); margin-top: auto;">
               <div>
-                <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">Valor da Obra Física</div>
+                <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">Physical Artwork Value</div>
                 <div style="font-size: 1.7rem; font-weight: 800; color: #fff;">
                   ${formatETH(art.priceEth)}
                 </div>
@@ -163,7 +163,7 @@ export async function renderArtworkDetailModal(art, activeTab = 'legal', customC
               <div style="display: flex; gap: 0.75rem;">
                 <button class="btn btn-gold btn-lg" id="btn-start-escrow" data-id="${art.id}">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                  <span>Adquirir com Escrow (${formatETH(art.priceEth)})</span>
+                  <span>Acquire via Escrow (${formatETH(art.priceEth)})</span>
                 </button>
               </div>
             </div>

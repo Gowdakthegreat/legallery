@@ -23,13 +23,13 @@ export function formatETH(amount) {
 
 /**
  * Generates the formal Ricardian Contract legal text according to Brazilian Law
- * (Lei 9.610/98 - Direitos Autorais and Lei 14.063/20 - Assinatura Eletrônica Avançada gov.br)
+ * (Federal Law 9,610/98 - Copyright Law and Federal Law 14,063/20 - Advanced Electronic Signature gov.br)
  */
 export function generateRicardianContractText({
   artworkTitle,
   artistName,
   artistCpf,
-  buyerName = 'Comprador Habilitado',
+  buyerName = 'Authorized Collector',
   buyerCpf = '000.000.000-00',
   technique,
   dimensions,
@@ -40,36 +40,36 @@ export function generateRicardianContractText({
   contractAddress,
   network = 'Ethereum (Base Layer 2)'
 }) {
-  return `INSTRUMENTO PARTICULAR DE COMPRA E VENDA DE OBRA DE ARTE FÍSICA ORIGINAL COM REGISTRO EM BLOCKCHAIN, CESSÃO DE DIREITOS PATRIMONIAIS E CLÁUSULA RICARDIANA
-Regido pela Lei Federal nº 10.406/2002 (Código Civil), Lei Federal nº 9.610/1998 (Direitos Autorais) e Lei Federal nº 14.063/2020 (Assinatura Eletrônica Avançada).
+  return `PRIVATE AGREEMENT FOR THE PURCHASE AND SALE OF ORIGINAL PHYSICAL ARTWORK WITH BLOCKCHAIN REGISTRATION, ASSIGNMENT OF ECONOMIC RIGHTS, AND RICARDIAN CLAUSE
+Governed by Brazilian Federal Law No. 10,406/2002 (Civil Code), Federal Law No. 9,610/1998 (Copyright Law), and Federal Law No. 14,063/2020 (Advanced Electronic Signature).
 
-CLÁUSULA PRIMEIRA - DAS PARTES
-1.1. VENDEDOR/AUTOR: ${artistName}, titular do CPF nº ${artistCpf}, usuário autenticado com fé pública via portal GOV.BR.
-1.2. COMPRADOR/ADQUIRENTE: ${buyerName}, titular do CPF nº ${buyerCpf}, usuário autenticado com fé pública via portal GOV.BR.
-1.3. INTERMEDIADORA: LeGallery Tecnologia e Arte Ltda., operadora do Smart Contract de Custódia (Escrow).
+CLAUSE ONE - THE PARTIES
+1.1. SELLER/AUTHOR: ${artistName}, holder of Tax ID/CPF No. ${artistCpf}, user officially authenticated with public faith via the GOV.BR portal.
+1.2. BUYER/ACQUIRER: ${buyerName}, holder of Tax ID/CPF No. ${buyerCpf}, user officially authenticated with public faith via the GOV.BR portal.
+1.3. INTERMEDIARY: LeGallery Fine Art & Technology Ltd., operator of the Smart Contract Escrow protocol.
 
-CLÁUSULA SEGUNDA - DO OBJETO E DA OBRA FÍSICA
-2.1. O presente contrato tem por objeto a compra e venda da OBRA FÍSICA ORIGINAL intitulada "${artworkTitle}", de autoria exclusiva do VENDEDOR.
-2.2. Especificações da Obra Física:
-    - Técnica: ${technique}
-    - Dimensões: ${dimensions}
-    - Peso aproximado: ${weight}
-    - Dispositivo Físico de Autenticidade (NFC Tamper-Proof): Serial ${nfcSerial} (Padrão NTAG 424 DNA Criptográfico fixado no verso da obra).
+CLAUSE TWO - SUBJECT MATTER AND PHYSICAL ARTWORK
+2.1. The object of this agreement is the purchase and sale of the ORIGINAL PHYSICAL ARTWORK entitled "${artworkTitle}", created exclusively by the SELLER.
+2.2. Physical Specifications of the Artwork:
+    - Technique & Medium: ${technique}
+    - Dimensions: ${dimensions}
+    - Approximate Weight: ${weight}
+    - Physical Authenticity Device (Tamper-Proof NFC): Serial ${nfcSerial} (Cryptographic NTAG 424 DNA standard affixed to the back of the artwork).
 
-CLÁUSULA TERCEIRA - DA TOKENIZAÇÃO E DO GÊMEO DIGITAL (DIGITAL TWIN)
-3.1. A referida obra física encontra-se acoplada de forma indissolúvel ao Token ERC-721 registrado na rede ${network}:
+CLAUSE THREE - TOKENIZATION AND DIGITAL TWIN
+3.1. Said physical artwork is indissolubly coupled to the ERC-721 Token registered on the ${network} network:
     - Smart Contract: ${contractAddress}
     - Token ID: #${tokenId}
-3.2. PRINCÍPIO DA INSEPARABILIDADE: A titularidade dos direitos patrimoniais da obra física pertence, de forma exclusiva, ao detentor da custódia do Token #${tokenId} na blockchain. A alienação física desprovida da transferência do token, ou vice-versa, constitui ilícito civil e violação aos arts. 421 e 422 do Código Civil (Boa-fé objetiva).
+3.2. PRINCIPLE OF INSEPARABILITY: Ownership of the economic rights of the physical artwork belongs exclusively to the lawful holder of Token #${tokenId} on the blockchain. Any physical transfer of the artwork without the corresponding on-chain token transfer, or vice-versa, constitutes a civil offense and a breach of Arts. 421 and 422 of the Civil Code (Objective Good Faith).
 
-CLÁUSULA QUARTA - DO PREÇO, PAGAMENTO E ESCROW
-4.1. O preço ajustado é de ${formatETH(priceEth)}, a ser depositado pelo COMPRADOR no Smart Contract de Custódia (Escrow).
-4.2. Os valores permanecerão bloqueados na blockchain até que a transportadora entregue o exemplar físico e o COMPRADOR valide a leitura da etiqueta NFC nº ${nfcSerial}.
+CLAUSE FOUR - PRICE, PAYMENT, AND ESCROW
+4.1. The agreed purchase price is ${formatETH(priceEth)}, to be deposited by the BUYER into the Smart Contract Escrow.
+4.2. Funds shall remain locked on-chain until the certified fine art logistics carrier delivers the physical piece and the BUYER verifies the NFC tag No. ${nfcSerial}.
 
-CLÁUSULA QUINTA - DO DIREITO DE SEQUÊNCIA (ART. 85 DA LEI 9.610/98)
-5.1. Fica expressamente pactuado que em toda alienação subsequente desta obra no mercado secundário, o Smart Contract reterá e repassará automaticamente 5% (cinco por cento) sobre o aumento de valor diretamente para a carteira do AUTOR original, em cumprimento ao Direito de Sequência.
+CLAUSE FIVE - RESALE ROYALTY / DROIT DE SUITE (ART. 85 OF LAW 9,610/98)
+5.1. It is expressly agreed that upon any subsequent resale of this artwork on the secondary market, the Smart Contract shall automatically retain and remit 5% (five percent) of any price increase directly to the original AUTHOR'S wallet, pursuant to the Resale Royalty Right (Droit de Suite).
 
-CLÁUSULA SEXTA - DA ASSINATURA ELETRÔNICA GOV.BR E VINCULAÇÃO CRIPTOGRÁFICA
-6.1. As partes reconhecem a plena validade, eficácia jurídica e presunção de autenticidade deste documento assinado eletronicamente via GOV.BR (Nível Prata ou Ouro), nos termos do Art. 5º, inciso II da Lei nº 14.063/2020.
-6.2. O Hash Criptográfico SHA-256 gerado a partir da íntegra deste instrumento fica imutavelmente cravado nos metadados do Token na rede ${network}.`;
+CLAUSE SIX - GOV.BR ELECTRONIC SIGNATURE & CRYPTOGRAPHIC ANCHORING
+6.1. The parties acknowledge the full legal validity, binding enforceability, and legal presumption of authenticity of this document electronically executed via GOV.BR (Silver or Gold Level), pursuant to Art. 5, Item II of Federal Law No. 14,063/2020.
+6.2. The SHA-256 Cryptographic Hash generated from the full text of this agreement is immutably anchored within the Token metadata on the ${network} network.`;
 }

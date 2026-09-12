@@ -16,33 +16,33 @@ export function renderNavbar(state, onNavigate) {
         <ul class="nav-menu">
           <li>
             <a href="#gallery" class="nav-link ${state.currentView === 'gallery' ? 'active' : ''}" data-view="gallery">
-              Vitrine
+              Collection
             </a>
           </li>
           <li>
             <a href="#verifier" class="nav-link ${state.currentView === 'verifier' ? 'active' : ''}" data-view="verifier">
-              Verificador NFC
+              NFC Verifier
             </a>
           </li>
           <li>
             <a href="#tokenize" class="nav-link ${state.currentView === 'tokenize' ? 'active' : ''}" data-view="tokenize">
-              Tokenizar Obra
+              Tokenize Art
             </a>
           </li>
           <li>
             <a href="#compliance" class="nav-link ${state.currentView === 'compliance' ? 'active' : ''}" data-view="compliance">
-              Conformidade Legal
+              Legal Compliance
             </a>
           </li>
         </ul>
 
         <div class="nav-actions">
-          <div class="badge badge-eth" title="Saldo da carteira Ethereum">
+          <div class="badge badge-eth" title="Ethereum wallet balance">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M6 12h12"/></svg>
             <span>${ethBalance}</span>
           </div>
 
-          <button class="btn btn-secondary btn-sm" id="btn-wallet-profile" title="Copiar endereço da carteira">
+          <button class="btn btn-secondary btn-sm" id="btn-wallet-profile" title="Copy wallet address">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M16 12h.01"/></svg>
             <span id="wallet-addr-label">0x71C...49b2</span>
           </button>
