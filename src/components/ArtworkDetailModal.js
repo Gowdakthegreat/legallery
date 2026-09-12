@@ -1,6 +1,6 @@
 import { formatUSDC, formatBRL, generateRicardianContractText, sha256 } from '../utils/cryptoSim.js';
 
-export async function renderArtworkDetailModal(art, activeTab = 'legal', customContractText = null) {
+export async function renderArtworkDetailModal(art, activeTab = 'legal', customContractText = null, currency = 'USDC') {
   const initialText = generateRicardianContractText({
     artworkTitle: art.title,
     artistName: art.artist,
