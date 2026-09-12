@@ -23,6 +23,7 @@ cache-zk
 # local deployments
 deployments/default
 deployments/localhost
+deployments/sepoliaForkNode
 
 # typescript
 *.tsbuildinfo

@@ -1,0 +1,25 @@
+{
+  "name": "@se-2/agent",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check-types": "tsc --noEmit",
+    "contas": "tsx src/contas.ts",
+    "demo": "tsx src/demo.ts",
+    "dev": "tsx watch src/index.ts",
+    "ensaio": "tsx src/ensaio.ts",
+    "start": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.124.0",
+    "dotenv": "^16.4.5",
+    "viem": "2.53.1",
+    "zod": "^4.1.13"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.8.2"
+  }
+}

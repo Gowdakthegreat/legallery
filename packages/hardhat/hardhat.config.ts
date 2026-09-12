@@ -58,6 +58,24 @@ export default defineConfig({
         enabled: process.env.MAINNET_FORKING_ENABLED === "true",
       },
     },
+    // Ensaio geral da Sepolia: um nó local que forka a rede de verdade e por isso responde com
+    // o chainId 11155111. Serve para exercitar todo o fluxo - inclusive a assinatura EIP-712 do
+    // gov.br, que carrega o chainId no domínio - sem gastar ETH de teste.
+    sepoliaFork: {
+      type: "edr-simulated",
+      // Sem isto o nó responderia 31337 e a assinatura EIP-712 do gov.br - que carrega o
+      // chainId no domínio - não bateria com a da Sepolia de verdade.
+      chainId: 11155111,
+      forking: {
+        url: `https://eth-sepolia.g.alchemy.com/v2/${providerApiKey}`,
+        enabled: true,
+      },
+    },
+    // O mesmo nó, visto de fora, para rodar `deploy` contra ele.
+    sepoliaForkNode: {
+      type: "http",
+      url: process.env.FORK_RPC_URL || "http://127.0.0.1:8546",
+    },
     mainnet: {
       type: "http",
       url: "https://mainnet.rpc.buidlguidl.com",

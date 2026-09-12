@@ -5,20 +5,34 @@
   "workspaces": {
     "packages": [
       "packages/hardhat",
-      "packages/nextjs"
+      "packages/nextjs",
+      "packages/agent"
     ]
   },
   "scripts": {
     "account": "yarn hardhat:account",
-    "account:import": "yarn workspace @se-2/hardhat account:import",
     "account:generate": "yarn workspace @se-2/hardhat account:generate",
+    "account:import": "yarn workspace @se-2/hardhat account:import",
     "account:reveal-pk": "yarn workspace @se-2/hardhat account:reveal-pk",
+    "agent": "yarn workspace @se-2/agent start",
+    "agent:dev": "yarn workspace @se-2/agent dev",
+    "agent:fork": "NETWORK=sepoliaForkNode yarn workspace @se-2/agent start",
+    "agent:sepolia": "NETWORK=sepolia yarn workspace @se-2/agent start",
     "chain": "yarn hardhat:chain",
+    "chain:fork": "yarn workspace @se-2/hardhat chain:fork",
     "compile": "yarn hardhat:compile",
+    "contas": "yarn workspace @se-2/agent contas",
+    "demo": "yarn workspace @se-2/agent demo",
+    "demo:fork": "NETWORK=sepoliaForkNode yarn workspace @se-2/agent demo",
+    "demo:sepolia": "NETWORK=sepolia yarn workspace @se-2/agent demo",
     "deploy": "yarn hardhat:deploy",
+    "deploy:fork": "yarn workspace @se-2/hardhat deploy:fork",
+    "deploy:sepolia": "yarn hardhat:deploy --network sepolia",
+    "ensaio": "NETWORK=sepoliaForkNode yarn workspace @se-2/agent ensaio",
     "fork": "yarn hardhat:fork",
     "format": "yarn next:format && yarn hardhat:format",
     "generate": "yarn account:generate",
+    "hardhat-verify": "yarn hardhat:hardhat-verify",
     "hardhat:account": "yarn workspace @se-2/hardhat account",
     "hardhat:chain": "yarn workspace @se-2/hardhat chain",
     "hardhat:check-types": "yarn workspace @se-2/hardhat check-types",
@@ -34,6 +48,7 @@
     "hardhat:lint-staged": "yarn workspace @se-2/hardhat lint-staged",
     "hardhat:test": "yarn workspace @se-2/hardhat test",
     "hardhat:verify": "yarn workspace @se-2/hardhat verify",
+    "ipfs": "yarn workspace @se-2/nextjs ipfs",
     "lint": "yarn next:lint && yarn hardhat:lint",
     "next:build": "yarn workspace @se-2/nextjs build",
     "next:check-types": "yarn workspace @se-2/nextjs check-types",
@@ -45,11 +60,9 @@
     "start": "yarn workspace @se-2/nextjs dev",
     "test": "yarn hardhat:test",
     "vercel": "yarn workspace @se-2/nextjs vercel",
-    "vercel:yolo": "yarn workspace @se-2/nextjs vercel:yolo",
-    "ipfs": "yarn workspace @se-2/nextjs ipfs",
     "vercel:login": "yarn workspace @se-2/nextjs vercel:login",
-    "verify": "yarn hardhat:verify",
-    "hardhat-verify": "yarn hardhat:hardhat-verify"
+    "vercel:yolo": "yarn workspace @se-2/nextjs vercel:yolo",
+    "verify": "yarn hardhat:verify"
   },
   "packageManager": "yarn@4.13.0",
   "devDependencies": {

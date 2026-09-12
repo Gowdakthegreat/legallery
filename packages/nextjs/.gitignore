@@ -37,3 +37,6 @@ yarn-error.log*
 *.tsbuildinfo
 
 ipfs-upload.config.json
+# artefatos gerados em tempo de execução (imagens enviadas e contratos ricardianos)
+/public/uploads
+/public/registros
