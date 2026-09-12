@@ -1,6 +1,6 @@
-import { formatUSDC, formatBRL } from '../utils/cryptoSim.js';
+import { formatETH } from '../utils/cryptoSim.js';
 
-export function renderArtworkGrid(artworks, currentFilter = 'all', searchQuery = '', currency = 'USDC', sortBy = 'default') {
+export function renderArtworkGrid(artworks, currentFilter = 'all', searchQuery = '', sortBy = 'default') {
   let filtered = artworks.filter(art => {
     const matchesFilter = currentFilter === 'all' || art.category.toLowerCase().includes(currentFilter.toLowerCase());
     const matchesSearch = !searchQuery || 
@@ -11,9 +11,9 @@ export function renderArtworkGrid(artworks, currentFilter = 'all', searchQuery =
   });
 
   if (sortBy === 'price-asc') {
-    filtered.sort((a, b) => a.priceUsdc - b.priceUsdc);
+    filtered.sort((a, b) => a.priceEth - b.priceEth);
   } else if (sortBy === 'price-desc') {
-    filtered.sort((a, b) => b.priceUsdc - a.priceUsdc);
+    filtered.sort((a, b) => b.priceEth - a.priceEth);
   }
 
   const getCount = (cat) => cat === 'all' 
@@ -26,11 +26,7 @@ export function renderArtworkGrid(artworks, currentFilter = 'all', searchQuery =
         <div class="section-header">
           <div>
             <h2>Obras Físicas Disponíveis</h2>
-            <p>Cada exemplar inclui custódia via Smart Contract, transporte segurado e Contrato Ricardiano registrado.</p>
-          </div>
-          <div class="badge badge-gov" style="padding: 0.5rem 1rem;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            <span>Assinaturas com Fé Pública (gov.br)</span>
+            <p>Exemplares originais com custódia via Smart Contract, transporte segurado e Contrato Ricardiano registrado.</p>
           </div>
         </div>
 
@@ -44,7 +40,7 @@ export function renderArtworkGrid(artworks, currentFilter = 'all', searchQuery =
           </ul>
 
           <div class="search-sort-box">
-            <select id="artwork-sort-select" style="padding: 0.45rem 0.85rem; font-size: 0.82rem; background: var(--bg-tertiary);">
+            <select id="artwork-sort-select" style="padding: 0.5rem 0.85rem; font-size: 0.85rem; background: var(--bg-tertiary); border: 1px solid var(--border-medium); border-radius: var(--radius-md); color: var(--text-primary);">
               <option value="default" ${sortBy === 'default' ? 'selected' : ''}>Ordenar: Destaques</option>
               <option value="price-asc" ${sortBy === 'price-asc' ? 'selected' : ''}>Menor Valor</option>
               <option value="price-desc" ${sortBy === 'price-desc' ? 'selected' : ''}>Maior Valor</option>
@@ -66,7 +62,6 @@ export function renderArtworkGrid(artworks, currentFilter = 'all', searchQuery =
               <div class="art-card-thumb">
                 <img src="${art.image}" alt="${art.title}" loading="lazy" />
                 <div class="art-card-badges">
-                  <span class="badge badge-gov">gov.br ${art.govBrStatus.split(' ')[1]}</span>
                   <span class="badge badge-l2">Token #${art.tokenId}</span>
                 </div>
               </div>
@@ -85,7 +80,6 @@ export function renderArtworkGrid(artworks, currentFilter = 'all', searchQuery =
                 <div class="art-card-artist">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                   <span>${art.artist}</span>
-                  <span style="font-size: 0.72rem; color: var(--text-muted);">(${art.artistCpf})</span>
                 </div>
 
                 <div class="art-card-specs">
@@ -105,13 +99,8 @@ export function renderArtworkGrid(artworks, currentFilter = 'all', searchQuery =
 
                 <div class="art-card-footer">
                   <div class="price-box">
-                    <span class="price-label">Valor em Escrow</span>
-                    <span class="price-val">
-                      ${currency === 'BRL' ? formatBRL(art.priceUsdc) : formatUSDC(art.priceUsdc)}
-                    </span>
-                    <span class="price-sub">
-                      ${currency === 'BRL' ? '≈ ' + formatUSDC(art.priceUsdc) : '≈ ' + formatBRL(art.priceUsdc)}
-                    </span>
+                    <span class="price-label">Preço</span>
+                    <span class="price-val">${formatETH(art.priceEth)}</span>
                   </div>
 
                   <button class="btn btn-secondary btn-sm btn-open-detail" data-id="${art.id}">

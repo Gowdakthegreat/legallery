@@ -1,21 +1,16 @@
-import { formatUSDC, formatBRL } from '../utils/cryptoSim.js';
+import { formatETH } from '../utils/cryptoSim.js';
 
 export function renderGalleryHero(featuredArt) {
   return `
     <header class="hero">
       <div class="container hero-grid">
         <div class="hero-content">
-          <div class="hero-tag">
-            <span class="nfc-radar" style="width: 8px; height: 8px; background: var(--gold-primary); border-radius: 50%;"></span>
-            <span>Protocolo Brasileiro de Obras Físicas RWA & Contratos Ricardianos</span>
-          </div>
-
           <h1 class="hero-title">
-            Arte física autêntica com <span>segurança jurídica plena</span> e liquidação em L2.
+            Arte física autêntica com <span>segurança jurídica</span> e liquidação em Ethereum.
           </h1>
 
           <p class="hero-subtitle">
-            Intermediação transparente de obras de arte físicas brasileiras. Cada exemplar possui um chip NFC inviolável e um <strong>Contrato Ricardiano bilateral assinado via gov.br</strong> com registro imutável na rede Ethereum (Base L2).
+            Intermediação de obras de arte físicas brasileiras originais. Cada peça possui chip NFC criptográfico inviolável e <strong>Contrato Ricardiano bilateral assinado via gov.br</strong> com registro imutável em blockchain.
           </p>
 
           <div class="hero-actions">
@@ -35,8 +30,8 @@ export function renderGalleryHero(featuredArt) {
               <p>Segurança Jurídica (Lei 14.063/20 e 9.610/98)</p>
             </div>
             <div class="stat-item">
-              <h4>Base L2</h4>
-              <p>Ethereum Rollup com Custódia em USDC</p>
+              <h4>Ethereum</h4>
+              <p>Custódia On-Chain em Smart Contract</p>
             </div>
             <div class="stat-item">
               <h4>NTAG 424</h4>
@@ -47,12 +42,6 @@ export function renderGalleryHero(featuredArt) {
 
         <div class="hero-showcase">
           <div class="hero-card" id="featured-art-card" data-art-id="${featuredArt.id}" style="cursor: pointer;">
-            <div class="hero-card-badge-top">
-              <span class="badge badge-gov">gov.br ${featuredArt.govBrStatus}</span>
-              <span class="badge badge-l2">${featuredArt.network}</span>
-              <span class="badge badge-nfc">NFC Inviolável</span>
-            </div>
-
             <div class="hero-card-img-wrap">
               <img src="${featuredArt.image}" alt="${featuredArt.title}" loading="eager" />
             </div>
@@ -64,14 +53,13 @@ export function renderGalleryHero(featuredArt) {
                   <p style="font-size: 0.85rem; color: #cbd5e1;">Por <strong>${featuredArt.artist}</strong> (${featuredArt.artistLocation})</p>
                 </div>
                 <div style="text-align: right;">
-                  <div style="font-size: 1.25rem; font-weight: 700; color: #fff;">${formatUSDC(featuredArt.priceUsdc)}</div>
-                  <div style="font-size: 0.75rem; color: var(--gold-secondary);">${formatBRL(featuredArt.priceUsdc)}</div>
+                  <div style="font-size: 1.35rem; font-weight: 700; color: #fff;">${formatETH(featuredArt.priceEth)}</div>
                 </div>
               </div>
 
               <div class="hash-pill">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--gov-green-light)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                <span>SHA-256 Ricardiano: <strong>0x8f2d79c41b80...e1a4</strong> (Gravado no Token #${featuredArt.tokenId})</span>
+                <span>SHA-256 Ricardiano: <strong>0x8f2d79c41b80...e1a4</strong> (Token #${featuredArt.tokenId})</span>
               </div>
             </div>
           </div>

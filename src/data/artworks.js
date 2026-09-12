@@ -1,5 +1,5 @@
 /**
- * Initial Curated Collection of Physical Artworks Tokenized on Base L2
+ * Curated Collection of Original Physical Artworks on Ethereum (Layer 2)
  */
 
 export const INITIAL_ARTWORKS = [
@@ -9,7 +9,7 @@ export const INITIAL_ARTWORKS = [
     artist: 'Beatriz Alencastro',
     artistCpf: '***.394.818-04',
     artistLocation: 'São Paulo, SP',
-    govBrStatus: 'Nível Ouro (Verificado)',
+    govBrStatus: 'Nível Ouro',
     category: 'Pintura a Óleo',
     year: 2024,
     technique: 'Óleo sobre linho cru e folha de ouro 24k com relevo táctil',
@@ -17,12 +17,12 @@ export const INITIAL_ARTWORKS = [
     weight: '6.4 kg',
     description: 'Obra física original inspirada no modernismo concreto brasileiro, com camadas espessadas de azul ultramar, pigmento terra de Siena e inserções de folha de ouro aplicadas artesanalmente.',
     image: '/assets/artwork_1.jpg',
-    priceUsdc: 4500,
+    priceEth: 1.45,
     tokenId: 1042,
     contractAddress: '0x3892BFA7332c69b61A9958197771fF642fE78E61',
-    network: 'Base L2 (Ethereum)',
-    nfcSerial: '04:E2:B4:7A:19:62:80 - NTAG 424 DNA (Tamper-Proof)',
-    status: 'Disponível', // Disponível | Em Custódia Escrow | Entregue / Vendido
+    network: 'Ethereum (Base L2)',
+    nfcSerial: '04:E2:B4:7A:19:62:80 - NTAG 424 DNA',
+    status: 'Disponível',
     shippingIncluded: true,
     estimatedDeliveryDays: 4,
     carrier: 'Logística de Obras de Arte com Seguro Integral',
@@ -30,7 +30,7 @@ export const INITIAL_ARTWORKS = [
       { date: '10/01/2026', event: 'Criação no Ateliê Alencastro (São Paulo)', tx: 'Físico' },
       { date: '18/01/2026', event: 'Aplicação da Tag NFC NTAG 424 DNA inviolável', tx: 'Físico' },
       { date: '22/01/2026', event: 'Assinatura Eletrônica do Contrato Ricardiano via gov.br', tx: 'gov.br' },
-      { date: '22/01/2026', event: 'Mint do Token ERC-721 na Base L2 com Hash Ricardiano', tx: '0x8f2d...91e3' }
+      { date: '22/01/2026', event: 'Registro do Token ERC-721 na rede Ethereum', tx: '0x8f2d...91e3' }
     ]
   },
   {
@@ -39,7 +39,7 @@ export const INITIAL_ARTWORKS = [
     artist: 'Bruno Calia',
     artistCpf: '***.812.558-91',
     artistLocation: 'Belo Horizonte, MG',
-    govBrStatus: 'Nível Ouro (Verificado)',
+    govBrStatus: 'Nível Ouro',
     category: 'Escultura',
     year: 2025,
     technique: 'Concreto arquitetônico usinado, latão escovado e madeira Imbuia maciça',
@@ -47,11 +47,11 @@ export const INITIAL_ARTWORKS = [
     weight: '18.2 kg',
     description: 'Escultura tridimensional em equilíbrio tensional geométrico. Acompanha base de exposição em freijó escurecido com selo de latão numerado e chip criptográfico interno.',
     image: '/assets/artwork_2.jpg',
-    priceUsdc: 6800,
+    priceEth: 2.20,
     tokenId: 1043,
     contractAddress: '0x3892BFA7332c69b61A9958197771fF642fE78E61',
-    network: 'Base L2 (Ethereum)',
-    nfcSerial: '04:88:C1:F2:99:41:80 - NTAG 424 DNA (Tamper-Proof)',
+    network: 'Ethereum (Base L2)',
+    nfcSerial: '04:88:C1:F2:99:41:80 - NTAG 424 DNA',
     status: 'Disponível',
     shippingIncluded: true,
     estimatedDeliveryDays: 6,
@@ -60,7 +60,7 @@ export const INITIAL_ARTWORKS = [
       { date: '05/02/2026', event: 'Fundição e usinagem concluída em Belo Horizonte', tx: 'Físico' },
       { date: '12/02/2026', event: 'Inserção de microchip NFC criptográfico na base de latão', tx: 'Físico' },
       { date: '15/02/2026', event: 'Validação e assinatura de autoria no gov.br', tx: 'gov.br' },
-      { date: '15/02/2026', event: 'Tokenização na Base L2 com contrato ricardiano', tx: '0x4a11...7c89' }
+      { date: '15/02/2026', event: 'Registro na rede Ethereum com contrato ricardiano', tx: '0x4a11...7c89' }
     ]
   },
   {
@@ -69,7 +69,7 @@ export const INITIAL_ARTWORKS = [
     artist: 'Mariana Duarte Prado',
     artistCpf: '***.194.208-15',
     artistLocation: 'Rio de Janeiro, RJ',
-    govBrStatus: 'Nível Prata (Verificado)',
+    govBrStatus: 'Nível Prata',
     category: 'Mista / Têxtil',
     year: 2024,
     technique: 'Técnica mista com minerais triturados, malaquita, linho cru rústico e costuras em fio de cobre',
@@ -77,11 +77,11 @@ export const INITIAL_ARTWORKS = [
     weight: '9.8 kg',
     description: 'Composição de grande escala que explora a geologia e as feridas topográficas do cerrado brasileiro. A textura em alto relevo possui proteção contra raios UV e umidade.',
     image: '/assets/artwork_3.jpg',
-    priceUsdc: 5900,
+    priceEth: 1.90,
     tokenId: 1044,
     contractAddress: '0x3892BFA7332c69b61A9958197771fF642fE78E61',
-    network: 'Base L2 (Ethereum)',
-    nfcSerial: '04:D3:51:7A:44:11:80 - NTAG 424 DNA (Tamper-Proof)',
+    network: 'Ethereum (Base L2)',
+    nfcSerial: '04:D3:51:7A:44:11:80 - NTAG 424 DNA',
     status: 'Disponível',
     shippingIncluded: true,
     estimatedDeliveryDays: 5,
@@ -90,7 +90,7 @@ export const INITIAL_ARTWORKS = [
       { date: '14/11/2025', event: 'Finalização do painel no ateliê em Santa Teresa (Rio de Janeiro)', tx: 'Físico' },
       { date: '20/11/2025', event: 'Fixação de etiqueta inviolável na face posterior do chassi', tx: 'Físico' },
       { date: '25/11/2025', event: 'Assinatura Eletrônica Avançada gov.br Lei 14.063/20', tx: 'gov.br' },
-      { date: '25/11/2025', event: 'Registro do Hash SHA-256 no Smart Contract Base L2', tx: '0x12bb...ef55' }
+      { date: '25/11/2025', event: 'Registro do Hash SHA-256 no Smart Contract Ethereum', tx: '0x12bb...ef55' }
     ]
   },
   {
@@ -99,7 +99,7 @@ export const INITIAL_ARTWORKS = [
     artist: 'Antonio Arruda',
     artistCpf: '***.729.408-33',
     artistLocation: 'Curitiba, PR',
-    govBrStatus: 'Nível Ouro (Verificado)',
+    govBrStatus: 'Nível Ouro',
     category: 'Pintura Geométrica',
     year: 2025,
     technique: 'Acrílica e têmpera sobre tela de algodão esticada em madeira nobre',
@@ -107,11 +107,11 @@ export const INITIAL_ARTWORKS = [
     weight: '5.1 kg',
     description: 'Homenagem geométrica aos grandes mestres da vanguarda brasileira com tensões de cores primárias, azuis profundos e ritmos angulares precisos.',
     image: '/assets/artwork_4.jpg',
-    priceUsdc: 3800,
+    priceEth: 1.20,
     tokenId: 1045,
     contractAddress: '0x3892BFA7332c69b61A9958197771fF642fE78E61',
-    network: 'Base L2 (Ethereum)',
-    nfcSerial: '04:AA:29:10:55:78:80 - NTAG 424 DNA (Tamper-Proof)',
+    network: 'Ethereum (Base L2)',
+    nfcSerial: '04:AA:29:10:55:78:80 - NTAG 424 DNA',
     status: 'Disponível',
     shippingIncluded: true,
     estimatedDeliveryDays: 3,
@@ -120,7 +120,7 @@ export const INITIAL_ARTWORKS = [
       { date: '02/01/2026', event: 'Conclusão da obra em Curitiba', tx: 'Físico' },
       { date: '08/01/2026', event: 'Etiquetagem criptográfica e certificado de autenticidade', tx: 'Físico' },
       { date: '10/01/2026', event: 'Autenticação gov.br e geração do Contrato Ricardiano', tx: 'gov.br' },
-      { date: '10/01/2026', event: 'Mint do Token ERC-721 na rede Base L2', tx: '0x99cc...2311' }
+      { date: '10/01/2026', event: 'Registro na rede Ethereum com Smart Contract', tx: '0x99cc...2311' }
     ]
   }
 ];

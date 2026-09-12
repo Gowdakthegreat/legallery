@@ -6,12 +6,9 @@ export function renderComplianceModal() {
 
         <div style="padding: 2.5rem;">
           <div style="text-align: center; margin-bottom: 2.25rem;">
-            <div class="badge badge-gov" style="margin-bottom: 0.5rem;">
-              Marco Regulatório Brasileiro • Segurança Jurídica & Fiscal
-            </div>
-            <h2 style="font-size: 1.9rem; margin-bottom: 0.4rem;">Arquitetura Anti-Fraude e Anti-Sonegação</h2>
+            <h2 style="font-size: 1.9rem; margin-bottom: 0.4rem;">Conformidade Legal & Fiscal</h2>
             <p style="font-size: 0.92rem; color: var(--text-secondary); max-width: 680px; margin: 0 auto;">
-              Como a LeGallery utiliza o Direito Brasileiro em harmonia com Smart Contracts na Base L2 para garantir transparência tributária e integridade de titularidade.
+              Como a LeGallery conecta a legislação brasileira aos Smart Contracts em Ethereum para garantir transparência tributária e segurança de titularidade.
             </p>
           </div>
 
@@ -24,12 +21,12 @@ export function renderComplianceModal() {
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
                 </div>
                 <div>
-                  <h4 style="font-size: 1rem; color: #fff;">1. Compliance com a Receita Federal</h4>
+                  <h4 style="font-size: 1rem; color: #fff;">1. Conformidade com a Receita Federal</h4>
                   <span style="font-size: 0.72rem; color: var(--base-blue-light); font-weight: 600;">IN RFB Nº 1888/2019</span>
                 </div>
               </div>
               <p style="font-size: 0.82rem; color: #cbd5e1; line-height: 1.55;">
-                Todas as operações liquidadas em USDC na Base L2 são atreladas aos CPFs e CNPJs previamente autenticados no <strong>gov.br</strong>. A plataforma gera automaticamente o extrato de conformidade fiscal para declaração de bens no IRPF e reporte à Receita Federal, extinguindo o anonimato usado em fraudes fiscais.
+                Todas as operações na rede Ethereum são atreladas aos CPFs e CNPJs previamente autenticados no <strong>gov.br</strong>. A plataforma gera automaticamente o extrato fiscal para a declaração de bens no Imposto de Renda e reporte regular à Receita Federal.
               </p>
             </div>
 
@@ -45,7 +42,7 @@ export function renderComplianceModal() {
                 </div>
               </div>
               <p style="font-size: 0.82rem; color: #cbd5e1; line-height: 1.55;">
-                A Assinatura Eletrônica Avançada do <strong>gov.br (Nível Prata ou Ouro)</strong> confere validade jurídica plena ao Contrato Ricardiano, com presunção de veracidade da autoria. Não há necessidade de cartório de notas tradicional: a prova criptográfica tem força executiva extrajudicial perante o Judiciário.
+                A Assinatura Eletrônica Avançada do <strong>gov.br (Nível Prata ou Ouro)</strong> confere validade jurídica plena ao Contrato Ricardiano, com presunção legal de veracidade. Não há necessidade de cartório tradicional: a prova criptográfica possui força executiva perante o Judiciário.
               </p>
             </div>
 
@@ -61,7 +58,7 @@ export function renderComplianceModal() {
                 </div>
               </div>
               <p style="font-size: 0.82rem; color: #cbd5e1; line-height: 1.55;">
-                Diferente de patentes, obras artísticas gozam de direitos morais inalienáveis do autor e direitos patrimoniais negociáveis. O Art. 85 garante <strong>5% de participação ao artista em toda mais-valia de revenda futura</strong> — o Smart Contract executa esse repasse diretamente na blockchain.
+                O Artigo 85 garante <strong>5% de participação ao artista em toda valorização em revenda subsequente</strong>. O Smart Contract executa esse repasse de forma automática e transparente para o autor original.
               </p>
             </div>
 
@@ -77,14 +74,14 @@ export function renderComplianceModal() {
                 </div>
               </div>
               <p style="font-size: 0.82rem; color: #cbd5e1; line-height: 1.55;">
-                O Contrato Ricardiano estipula que a posse legítima da tela física só é válida se acompanhada do token ERC-721 registrado na Base L2. A venda física desvinculada configura quebra culposa da boa-fé objetiva e fraude sujeita a busca e apreensão.
+                O Contrato Ricardiano estipula que a posse legítima da obra física original é inseparável do token registrado em blockchain. Qualquer venda física desacoplada configura quebra culposa da boa-fé objetiva e fraude civil.
               </p>
             </div>
           </div>
 
-          <!-- Split Tributário e de Liquidação -->
+          <!-- Split de Liquidação -->
           <div class="split-card">
-            <h4 style="font-size: 1.05rem; color: #fff; margin-bottom: 0.5rem;">Divisão Automatizada de Cada Transação (Smart Contract Split)</h4>
+            <h4 style="font-size: 1.05rem; color: #fff; margin-bottom: 0.5rem;">Divisão Automatizada de Pagamentos (Smart Contract Split)</h4>
             <div class="split-bar">
               <div class="split-artist" style="width: 90%;" title="90% Artista"></div>
               <div class="split-platform" style="width: 5%;" title="5% Plataforma"></div>
@@ -92,7 +89,7 @@ export function renderComplianceModal() {
             </div>
             <div style="display: flex; justify-content: space-between; font-size: 0.8rem; flex-wrap: wrap; gap: 0.5rem;">
               <span style="color: #60a5fa;">● <strong>90%</strong> Repasse Direto ao Artista</span>
-              <span style="color: var(--gold-secondary);">● <strong>5%</strong> Taxa de Intermediação LeGallery (NFS-e Emitida)</span>
+              <span style="color: var(--gold-secondary);">● <strong>5%</strong> Taxa de Intermediação LeGallery</span>
               <span style="color: var(--gov-green-light);">● <strong>5%</strong> Reserva Direito de Sequência (Art. 85 LDA)</span>
             </div>
           </div>

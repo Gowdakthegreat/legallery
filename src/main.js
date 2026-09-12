@@ -18,9 +18,8 @@ const state = {
   currentView: 'gallery', // 'gallery' | 'verifier' | 'tokenize' | 'compliance'
   currentFilter: 'all',
   searchQuery: '',
-  currency: 'USDC', // 'USDC' | 'BRL'
   sortBy: 'default', // 'default' | 'price-asc' | 'price-desc'
-  walletBalance: 12500, // USDC
+  walletBalance: 4.85, // ETH
   
   // Modal states
   selectedArtDetailId: null,
@@ -83,14 +82,14 @@ async function renderApp() {
   if (state.currentView === 'gallery') {
     mainContent = `
       ${renderGalleryHero(featuredArt)}
-      ${renderArtworkGrid(state.artworks, state.currentFilter, state.searchQuery, state.currency, state.sortBy)}
+      ${renderArtworkGrid(state.artworks, state.currentFilter, state.searchQuery, state.sortBy)}
     `;
   } else if (state.currentView === 'verifier') {
     mainContent = `
       <div class="container" style="padding-top: 4rem; padding-bottom: 6rem;">
         <div style="text-align: center; margin-bottom: 2rem;">
-          <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">Verificador de Tag NFC & Proveniência</h1>
-          <p>Audite a autenticidade do exemplar físico e a integridade do Contrato Ricardiano na Base L2.</p>
+          <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">Verificador de Tag NFC & Autenticidade</h1>
+          <p>Audite a autenticidade do exemplar físico e a integridade do Contrato Ricardiano na rede Ethereum.</p>
         </div>
         <div style="max-width: 860px; margin: 0 auto;">
           <button class="btn btn-gold btn-lg" id="btn-open-nfc-standalone" style="width: 100%; margin-bottom: 2rem;">
@@ -108,7 +107,7 @@ async function renderApp() {
   if (state.selectedArtDetailId) {
     const art = state.artworks.find(a => a.id === state.selectedArtDetailId);
     if (art) {
-      modalHtml += await renderArtworkDetailModal(art, state.activeRicardianTab, state.tamperedContractText, state.currency);
+      modalHtml += await renderArtworkDetailModal(art, state.activeRicardianTab, state.tamperedContractText);
     }
   }
 
@@ -143,11 +142,11 @@ async function renderApp() {
         <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 1rem;">
           <strong style="color: #fff; font-family: var(--font-serif); font-size: 1.1rem; letter-spacing: 0.05em;">LeGallery</strong>
           <span>•</span>
-          <span>Base L2 Ethereum (ChainId: 8453)</span>
+          <span>Rede Ethereum (Base L2)</span>
           <span>•</span>
           <span>Lei Federal 14.063/2020 (gov.br)</span>
           <span>•</span>
-          <span>Lei Federal 9.610/1998 (LDA)</span>
+          <span>Lei Federal 9.610/1998 (Direitos Autorais)</span>
         </div>
         <p>Intermediação com segurança jurídica plena e custódia inteligente de arte física brasileira.</p>
       </div>
@@ -222,14 +221,6 @@ function attachEventListeners() {
     });
   }
 
-  // Currency Toggle Listeners
-  document.querySelectorAll('.currency-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      state.currency = btn.dataset.currency;
-      renderApp();
-    });
-  });
-
   // Sort Selector
   const sortSelect = document.getElementById('artwork-sort-select');
   if (sortSelect) {
@@ -253,7 +244,7 @@ function attachEventListeners() {
   if (btnWalletProfile) {
     btnWalletProfile.addEventListener('click', () => {
       navigator.clipboard?.writeText('0x71C839210984AA61BC947819230581B849b2');
-      showToast('Endereço da carteira Base L2 copiado!', 'info');
+      showToast('Endereço da carteira copiado!', 'info');
     });
   }
 
@@ -261,7 +252,7 @@ function attachEventListeners() {
   const btnExportPdf = document.getElementById('btn-export-pdf');
   if (btnExportPdf) {
     btnExportPdf.addEventListener('click', () => {
-      showToast('Minuta jurídica oficial exportada com selo ICP-Brasil/gov.br!', 'success');
+      showToast('Minuta jurídica oficial exportada com selo gov.br!', 'success');
       setTimeout(() => {
         window.print();
       }, 500);
@@ -361,7 +352,7 @@ function attachEventListeners() {
   if (btnEscrowDeposit) {
     btnEscrowDeposit.addEventListener('click', () => {
       state.escrowStep = 2;
-      showToast('Depósito de USDC efetuado com sucesso no Smart Contract!', 'success');
+      showToast('Depósito de ETH efetuado no Smart Contract!', 'success');
       renderApp();
     });
   }
@@ -370,7 +361,7 @@ function attachEventListeners() {
   if (btnEscrowSignGov) {
     btnEscrowSignGov.addEventListener('click', () => {
       state.escrowStep = 3;
-      showToast('Contrato assinado com gov.br! Hash cravado na Base L2.', 'success');
+      showToast('Contrato assinado com gov.br! Hash registrado na blockchain.', 'success');
       renderApp();
     });
   }
@@ -390,7 +381,7 @@ function attachEventListeners() {
       const art = state.artworks.find(a => a.id === state.selectedArtEscrowId);
       if (art) {
         art.status = 'Adquirida / Posse Transferida';
-        state.walletBalance -= art.priceUsdc;
+        state.walletBalance = Math.max(0, state.walletBalance - art.priceEth);
       }
       state.selectedArtEscrowId = null;
       state.escrowStep = 1;
@@ -469,7 +460,7 @@ function attachEventListeners() {
       const dimensions = document.getElementById('tok-dimensions').value;
       const weight = document.getElementById('tok-weight').value;
       const nfc = document.getElementById('tok-nfc').value;
-      const price = parseFloat(document.getElementById('tok-price').value) || 3000;
+      const price = parseFloat(document.getElementById('tok-price').value) || 1.5;
 
       const newId = `art-${String(state.artworks.length + 1).padStart(3, '0')}`;
       const newTokenId = 1045 + state.artworks.length;
@@ -480,19 +471,19 @@ function attachEventListeners() {
         artist,
         artistCpf,
         artistLocation: 'São Paulo, SP',
-        govBrStatus: 'Nível Ouro (Verificado)',
+        govBrStatus: 'Nível Ouro',
         category,
         year: 2026,
         technique,
         dimensions,
         weight,
-        description: `Obra física contemporânea ${technique}, tokenizada pelo autor com certificação jurídica gov.br.`,
-        image: '/assets/artwork_1.jpg', // uses artwork 1 as realistic demonstration
-        priceUsdc: price,
+        description: `Obra física contemporânea ${technique}, registrada pelo autor com certificação jurídica gov.br.`,
+        image: '/assets/artwork_1.jpg',
+        priceEth: price,
         tokenId: newTokenId,
         contractAddress: '0x3892BFA7332c69b61A9958197771fF642fE78E61',
-        network: 'Base L2 (Ethereum)',
-        nfcSerial: `${nfc} - NTAG 424 DNA (Tamper-Proof)`,
+        network: 'Ethereum (Base L2)',
+        nfcSerial: `${nfc} - NTAG 424 DNA`,
         status: 'Disponível',
         shippingIncluded: true,
         estimatedDeliveryDays: 4,
@@ -500,14 +491,14 @@ function attachEventListeners() {
         provenance: [
           { date: 'Hoje', event: 'Criação e registro no ateliê', tx: 'Físico' },
           { date: 'Hoje', event: 'Aplicação da Tag NFC NTAG 424 DNA', tx: 'Físico' },
-          { date: 'Hoje', event: 'Assinatura Eletrônica gov.br Ouro (Lei 14.063/20)', tx: 'gov.br' },
-          { date: 'Hoje', event: 'Mint na Base L2 com Hash do Contrato Ricardiano', tx: '0x9b11...aa42' }
+          { date: 'Hoje', event: 'Assinatura Eletrônica gov.br (Lei 14.063/20)', tx: 'gov.br' },
+          { date: 'Hoje', event: 'Registro na rede Ethereum com Hash do Contrato Ricardiano', tx: '0x9b11...aa42' }
         ]
       };
 
       state.artworks.unshift(newArtwork);
       state.isTokenizeModalOpen = false;
-      showToast(`Obra "${title}" tokenizada com sucesso na Base L2!`, 'success');
+      showToast(`Obra "${title}" registrada com sucesso na rede Ethereum!`, 'success');
       state.selectedArtDetailId = newArtwork.id;
       renderApp();
     });
